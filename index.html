@@ -119,6 +119,7 @@
       placeholder="Enter number of children" oninput="calc()">
   </div>
 
+  <!-- ✅ ONLY ONE RESULT BOX (FIXED) -->
   <div class="box">
     <div class="row">
       <span>TPU</span>
@@ -157,10 +158,8 @@
 
   <script>
     function resetAndCalc() {
-      // Reset inputs when combo changes
       document.getElementById("adults").value = "";
       document.getElementById("children").value = "";
-
       calc();
     }
 
@@ -183,11 +182,9 @@
       let ch = parseInt(document.getElementById("children").value) || 0;
 
       let warningText = "";
-
       if (na && ch > 0) {
         warningText = "⚠ This combo ticket is not for child, kindly set child value to 0!";
       }
-
       document.getElementById("warning").innerText = warningText;
 
       let tpu = a * ta + ch * tc;
