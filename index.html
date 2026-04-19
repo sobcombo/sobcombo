@@ -1,1 +1,238 @@
-<!DOCTYPE html><html><head><title>SOB Combos Calculator</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>body{font-family:Arial;margin:0;text-align:center}.container{margin-top:40px}input,select{padding:10px;margin:8px;width:90%;max-width:300px;font-size:16px}.box{margin-top:20px;width:90%;max-width:320px;margin-left:auto;margin-right:auto}.row{display:flex;justify-content:space-between;font-size:18px;margin:6px 0}.total{font-weight:bold;margin-top:10px;font-size:20px}.warning{color:red;font-weight:bold;margin-top:10px;padding:0 10px}#inclusions{text-align:center;margin-top:12px;padding:0 10px;font-size:14px}.footer-right{position:fixed;bottom:5px;right:10px;font-size:11px;text-align:right}.footer-left{position:fixed;bottom:5px;left:10px;font-size:11px}</style></head><body><h2>SOB Combos Calculator</h2><div class="container"><select id="combo" onchange="calc()"><option value="">Select Combo</option><option value="170,80,70,150">390/300 TU Explorer Combo</option><option value="170,80,0,227">397/307 Adventure Combo</option><option value="170,80,28,200">398/308 ECO FUN Combo</option><option value="170,80,255,0">425/335 Snow Adventure Combo</option><option value="400,300,0,99">499/399 Astha Combo</option><option value="370,180,0,175">545/355 Shiv Ganesha Combo</option><option value="550,375,0,50">600/425 Namah Combo</option><option value="170,170,0,529,NA">699/NA Ultimate Play Combo</option><option value="370,180,325,50">745/555 Viewing Fun Combo</option><option value="550,375,249,170">969/794 Symbolic Combo</option><option value="170,80,355,574">1099/1009 Delight Combo</option><option value="370,180,355,574">1299/1109 Mini Blast Combo</option><option value="550,375,250,599">1399/1224 All in Fun Combo</option><option value="1350,775,0,150">1500/925 Divine Rush Combo</option><option value="1400,1400,449,2350,NA">4199/NA Ultimate Mega Combo</option></select><br><input type="number" id="adults" value="1" min="0" placeholder="Enter no. of Adults" oninput="calc()"><br><input type="number" id="children" value="0" min="0" placeholder="Enter no. of Children" oninput="calc()"></div><div class="box"><div class="row"><span>TPU</span><span>Rs. <span id="tpu">0</span></span></div><div class="row"><span>Offspring (OEPL)</span><span>Rs. <span id="offspring">0</span></span></div><div class="row"><span>Pinnacle (PAEPL)</span><span>Rs. <span id="pinnacle">0</span></span></div><hr><div class="row total"><span>Total</span><span>Rs. <span id="total">0</span></span></div></div><p id="inclusions"></p><p class="warning" id="warning"></p><div class="footer-right"><div>Created for my Team :)</div><div>by MS</div></div><div class="footer-left">Last Updated: 18/04/2026 | V1.0</div><script>function calc(){let c=document.getElementById("combo"),t=c.options[c.selectedIndex].text,v=c.value;if(!v)return;let p=v.split(","),ta=parseInt(p[0]),tc=parseInt(p[1]),o=parseInt(p[2]),pi=parseInt(p[3]),na=p[4]==="NA",a=parseInt(document.getElementById("adults").value)||0,ch=parseInt(document.getElementById("children").value)||0,w="";if(na&&ch>0)w="⚠ This combo ticket is not for child, kindly set child value to 0!";document.getElementById("warning").innerText=w;let tpu=a*ta+ch*tc,off=(a+ch)*o,pin=(a+ch)*pi,tot=tpu+off+pin;document.getElementById("tpu").innerText=tpu;document.getElementById("offspring").innerText=off;document.getElementById("pinnacle").innerText=pin;document.getElementById("total").innerText=tot;let i="";if(t.includes("Astha"))i="Park Entry + Nij Aatma Manthan + 2 Times Drop";else if(t.includes("Shiv Ganesha"))i="Park Entry + Viewing Gallery + 1 Time Drop Only + Eyelusion + World of Ganesha";else if(t.includes("Viewing Fun"))i="Park Entry + Viewing Gallery + Snow Park + Food (Rs.110) + 1 Time Drop Only";else if(t.includes("Symbolic"))i="Park Entry + Viewing Gallery + Nij Aatma Manthan + World of Ganesha + Snow Park + 2 Times Drop + Wax Museum";else if(t.includes("Delight"))i="Park Entry + Snow Park + Wax Museum + Eyelusion + 5 Rides + 12D Cinema + Mirror Maze + Horror House + Food (Rs.50) + 1 Time Drop Only + World of Ganesha + Souvenir (Rs.75)";else if(t.includes("Mini Blast"))i="Park Entry + Viewing Gallery + Snow Park + Wax Museum + Eyelusion + 5 Rides + 12D Cinema + Mirror Maze + Horror House + Food (Rs.50) + 1 Time Drop Only + World of Ganesha + Souvenir (Rs.75)";else if(t.includes("All in Fun"))i="Park Entry + Viewing Gallery + Nij Aatma Manthan + Snow Park + Wax Museum + Eyelusion + 5 Rides + 2 Times Drop + World of Ganesha";else if(t.includes("TU Explorer"))i="Park Entry + Wax Museum + Eyelusion + World of Ganesha";else if(t.includes("Snow Adventure"))i="Park Entry + Snow Park";else if(t.includes("Ultimate Play"))i="Park Entry + 10 Rides + Go Kart + 3 Times Drop";else if(t.includes("Adventure Combo"))i="Park Entry + 5 Rides/Games + 1 Time Drop Only";else if(t.includes("ECO FUN"))i="Park Entry + 12D Cinema + Mirror Maze + Horror House + Wax Museum";else if(t.includes("Namah"))i="Park Entry + Viewing Gallery + Nij Aatma Manthan + 1 Time Drop Only";else if(t.includes("Divine Rush"))i="Park Entry + Viewing Gallery + Nij Aatma Manthan + Nij Aatma Abhishek + 3 Times Drop + World of Ganesha";else if(t.includes("Ultimate Mega"))i="Park Entry + Viewing Gallery + Nij Aatma Manthan + Nij Aatma Abhishek + Snow Park + Wax Museum + Eyelusion + 10 Rides + Go Kart + Box Cricket + VR Zone + Souvenir (Rs.110) + Food (Rs.110) + Bungee Jumping + 3 Times Drop + World of Ganesha + 12D Cinema + Mirror Maze + Horror House";document.getElementById("inclusions").innerText=i}</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SOB Combos Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      text-align: center;
+    }
+
+    .container {
+      margin-top: 40px;
+    }
+
+    input, select {
+      padding: 10px;
+      margin: 8px;
+      width: 90%;
+      max-width: 300px;
+      font-size: 16px;
+    }
+
+    .box {
+      margin-top: 20px;
+      width: 90%;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      margin: 6px 0;
+    }
+
+    .total {
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 20px;
+    }
+
+    .warning {
+      color: red;
+      font-weight: bold;
+      margin-top: 10px;
+      padding: 0 10px;
+    }
+
+    #inclusions {
+      text-align: center;
+      margin-top: 12px;
+      padding: 0 10px;
+      font-size: 14px;
+    }
+
+    .footer-right {
+      position: fixed;
+      bottom: 5px;
+      right: 10px;
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .footer-left {
+      position: fixed;
+      bottom: 5px;
+      left: 10px;
+      font-size: 11px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>SOB Combos Calculator</h2>
+
+  <div class="container">
+    <select id="combo" onchange="calc()">
+      <option value="">Select Combo</option>
+      <option value="170,80,70,150">390/300 TU Explorer Combo</option>
+      <option value="170,80,0,227">397/307 Adventure Combo</option>
+      <option value="170,80,28,200">398/308 ECO FUN Combo</option>
+      <option value="170,80,255,0">425/335 Snow Adventure Combo</option>
+      <option value="400,300,0,99">499/399 Astha Combo</option>
+      <option value="370,180,0,175">545/355 Shiv Ganesha Combo</option>
+      <option value="550,375,0,50">600/425 Namah Combo</option>
+      <option value="170,170,0,529,NA">699/NA Ultimate Play Combo</option>
+      <option value="370,180,325,50">745/555 Viewing Fun Combo</option>
+      <option value="550,375,249,170">969/794 Symbolic Combo</option>
+      <option value="170,80,355,574">1099/1009 Delight Combo</option>
+      <option value="370,180,355,574">1299/1109 Mini Blast Combo</option>
+      <option value="550,375,250,599">1399/1224 All in Fun Combo</option>
+      <option value="1350,775,0,150">1500/925 Divine Rush Combo</option>
+      <option value="1400,1400,449,2350,NA">4199/NA Ultimate Mega Combo</option>
+    </select>
+
+    <br>
+
+    <input type="number" id="adults" value="1" min="0"
+      placeholder="Enter no. of Adults" oninput="calc()">
+
+    <br>
+
+    <input type="number" id="children" value="0" min="0"
+      placeholder="Enter no. of Children" oninput="calc()">
+  </div>
+
+  <div class="box">
+    <div class="row">
+      <span>TPU</span>
+      <span>Rs. <span id="tpu">0</span></span>
+    </div>
+
+    <div class="row">
+      <span>Offspring (OEPL)</span>
+      <span>Rs. <span id="offspring">0</span></span>
+    </div>
+
+    <div class="row">
+      <span>Pinnacle (PAEPL)</span>
+      <span>Rs. <span id="pinnacle">0</span></span>
+    </div>
+
+    <hr>
+
+    <div class="row total">
+      <span>Total</span>
+      <span>Rs. <span id="total">0</span></span>
+    </div>
+  </div>
+
+  <p id="inclusions"></p>
+  <p class="warning" id="warning"></p>
+
+  <div class="footer-right">
+    <div>Created for my Team :)</div>
+    <div>by MS</div>
+  </div>
+
+  <div class="footer-left">
+    Last Updated: 18/04/2026 | V1.0
+  </div>
+
+  <script>
+    function calc() {
+      let c = document.getElementById("combo");
+      let t = c.options[c.selectedIndex].text;
+      let v = c.value;
+
+      if (!v) return;
+
+      let p = v.split(",");
+
+      let ta = parseInt(p[0]);
+      let tc = parseInt(p[1]);
+      let o = parseInt(p[2]);
+      let pi = parseInt(p[3]);
+      let na = p[4] === "NA";
+
+      let a = parseInt(document.getElementById("adults").value) || 0;
+      let ch = parseInt(document.getElementById("children").value) || 0;
+
+      let warningText = "";
+
+      if (na && ch > 0) {
+        warningText = "⚠ This combo ticket is not for child, kindly set child value to 0!";
+      }
+
+      document.getElementById("warning").innerText = warningText;
+
+      let tpu = a * ta + ch * tc;
+      let off = (a + ch) * o;
+      let pin = (a + ch) * pi;
+      let total = tpu + off + pin;
+
+      document.getElementById("tpu").innerText = tpu;
+      document.getElementById("offspring").innerText = off;
+      document.getElementById("pinnacle").innerText = pin;
+      document.getElementById("total").innerText = total;
+
+      let inclusions = "";
+
+      if (t.includes("Astha"))
+        inclusions = "Park Entry + Nij Aatma Manthan + 2 Times Drop";
+
+      else if (t.includes("Shiv Ganesha"))
+        inclusions = "Park Entry + Viewing Gallery + 1 Time Drop Only + Eyelusion + World of Ganesha";
+
+      else if (t.includes("Viewing Fun"))
+        inclusions = "Park Entry + Viewing Gallery + Snow Park + Food (Rs.110) + 1 Time Drop Only";
+
+      else if (t.includes("Symbolic"))
+        inclusions = "Park Entry + Viewing Gallery + Nij Aatma Manthan + World of Ganesha + Snow Park + 2 Times Drop + Wax Museum";
+
+      else if (t.includes("Delight"))
+        inclusions = "Park Entry + Snow Park + Wax Museum + Eyelusion + 5 Rides + 12D Cinema + Mirror Maze + Horror House + Food (Rs.50) + 1 Time Drop Only + World of Ganesha + Souvenir (Rs.75)";
+
+      else if (t.includes("Mini Blast"))
+        inclusions = "Park Entry + Viewing Gallery + Snow Park + Wax Museum + Eyelusion + 5 Rides + 12D Cinema + Mirror Maze + Horror House + Food (Rs.50) + 1 Time Drop Only + World of Ganesha + Souvenir (Rs.75)";
+
+      else if (t.includes("All in Fun"))
+        inclusions = "Park Entry + Viewing Gallery + Nij Aatma Manthan + Snow Park + Wax Museum + Eyelusion + 5 Rides + 2 Times Drop + World of Ganesha";
+
+      else if (t.includes("TU Explorer"))
+        inclusions = "Park Entry + Wax Museum + Eyelusion + World of Ganesha";
+
+      else if (t.includes("Snow Adventure"))
+        inclusions = "Park Entry + Snow Park";
+
+      else if (t.includes("Ultimate Play"))
+        inclusions = "Park Entry + 10 Rides + Go Kart + 3 Times Drop";
+
+      else if (t.includes("Adventure Combo"))
+        inclusions = "Park Entry + 5 Rides/Games + 1 Time Drop Only";
+
+      else if (t.includes("ECO FUN"))
+        inclusions = "Park Entry + 12D Cinema + Mirror Maze + Horror House + Wax Museum";
+
+      else if (t.includes("Namah"))
+        inclusions = "Park Entry + Viewing Gallery + Nij Aatma Manthan + 1 Time Drop Only";
+
+      else if (t.includes("Divine Rush"))
+        inclusions = "Park Entry + Viewing Gallery + Nij Aatma Manthan + Nij Aatma Abhishek + 3 Times Drop + World of Ganesha";
+
+      else if (t.includes("Ultimate Mega"))
+        inclusions = "Park Entry + Viewing Gallery + Nij Aatma Manthan + Nij Aatma Abhishek + Snow Park + Wax Museum + Eyelusion + 10 Rides + Go Kart + Box Cricket + VR Zone + Souvenir (Rs.110) + Food (Rs.110) + Bungee Jumping + 3 Times Drop + World of Ganesha + 12D Cinema + Mirror Maze + Horror House";
+
+      document.getElementById("inclusions").innerText = inclusions;
+    }
+  </script>
+
+</body>
+</html>
