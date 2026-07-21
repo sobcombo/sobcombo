@@ -1,1080 +1,1099 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title>SOB coMboS calculator</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>SOB coMboS calculator</title>
 <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 *{
-font-family:'Arimo',sans-serif;
-box-sizing:border-box;
+    box-sizing:border-box;
+    font-family:'Arimo',sans-serif;
 }
 
-body{
-text-align:center;
-margin:0;
-padding:0;
-background:
-radial-gradient(circle at top left,#ffffff,transparent 40%),
-radial-gradient(circle at bottom right,#dfefff,transparent 35%),
-linear-gradient(180deg,#f7fbff,#edf4fb);
-}
-body{
-background:var(--bg);
-color:var(--text);
-}
 :root{
-
---bg:#f7fbff;
---text:#000;
---card:#fff;
---input:#fff;
---table:#fff;
---border:#ddd;
-
+    --text:#000;
+    --card:#fff;
+    --input:#fff;
+    --table:#fff;
+    --border:#ddd;
 }
+
+body{
+    margin:0;
+    text-align:center;
+    color:var(--text);
+    background:
+        radial-gradient(circle at top left,#fff,transparent 40%),
+        radial-gradient(circle at bottom right,#dfefff,transparent 35%),
+        linear-gradient(180deg,#f7fbff,#edf4fb);
+}
+
 body.dark{
-
---bg:#151515;
---text:#f2f2f2;
---card:#242424;
---input:#2f2f2f;
---table:#202020;
---border:#555;
-
+    --text:#f2f2f2;
+    --card:#242424;
+    --input:#2f2f2f;
+    --table:#202020;
+    --border:#555;
+    background:#151515;
 }
+
 .container{
-margin-top:20px;
+    margin-top:20px;
 }
 
 .top-buttons{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:10px 12px 0 12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 12px 0;
 }
 
 .switch-btn{
-background:linear-gradient(135deg,#1976d2,#0d47a1);
-box-shadow:4px 4px 0 #0b3a82,6px 8px 14px rgba(0,0,0,.18);
-transition:.15s;
-color:white;
-padding:6px 10px;
-border-radius:6px;
-text-decoration:none;
-font-size:12px;
-font-weight:bold;
-display:inline-block;
-}
-
-.switch-btn:hover{
-transform:translate(-1px,-1px);
-filter:brightness(1.08);
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:6px;
+    color:#fff;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:bold;
+    box-shadow:4px 4px 0 #0b3a82,6px 8px 14px #0003;
 }
 
 .reverse-btn{
-background:linear-gradient(135deg,#00c853,#009624);
-box-shadow:3px 3px 0 #00701a,5px 6px 10px rgba(0,0,0,.18);
-}
-
-.sobField{
-width:90%;
-max-width:340px;
-margin:auto;
-display:flex;
-align-items:center;
-background:#fff;
-border-radius:14px;
-box-shadow:
-inset 2px 2px 5px rgba(0,0,0,.08),
-4px 4px 10px rgba(0,0,0,.12);
-overflow:hidden;
-}
-
-.sobField input{
-flex:1;
-border:none;
-margin:0;
-padding:12px 14px;
-font-size:16px;
-background:transparent;
-box-shadow:none;
-outline:none;
-}
-input{
-background:var(--input);
-color:var(--text);
-}
-table{
-background:var(--table);
-}
-#scanBtn{
-width:46px;
-height:46px;
-border:none;
-background:transparent;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-padding:0;
-margin:0;
-box-shadow:none;
-border-left:1px solid #ddd;
-border-radius:0;
-}
-
-#scanBtn:hover{
-background:#f5f5f5;
-}
-
-#scanBtn svg{
-width:22px;
-height:22px;
-fill:#222;
+    background:linear-gradient(135deg,#00c853,#009624);
+    box-shadow:3px 3px 0 #00701a,5px 6px 10px #0003;
 }
 
 .report-btn{
-background:linear-gradient(135deg,#8e24aa,#5e35b1);
-box-shadow:3px 3px 0 #4527a0,5px 6px 10px rgba(0,0,0,.18);
+    background:linear-gradient(135deg,#8e24aa,#5e35b1);
+    box-shadow:3px 3px 0 #4527a0,5px 6px 10px #0003;
 }
 
-.deleteBtn{
-padding:2px 6px;
-font-size:11px;
-line-height:1;
-margin:0;
-min-width:auto;
+.userLoginBox{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin:12px auto;
 }
 
-.a4{
-padding:8mm;
-box-sizing:border-box;
-overflow:hidden;
+.hiText{
+    font-size:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#usernameInput{
+    width:100px;
+    margin:0;
+    padding:7px 10px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+#loadBtn{
+    margin:0 0 0 4px;
+    padding:5px 10px;
+    color:#fff;
+    font-size:12px;
+    border-radius:100px;
+    background:linear-gradient(135deg,#1976d2,#0d47a1);
+    box-shadow:4px 4px 0 #0b3a82,6px 8px 14px #0003;
 }
 
 input,
 select{
-padding:12px;
-padding-right:35px;
-margin:8px;
-width:90%;
-max-width:340px;
-font-size:16px;
-border:none;
-border-radius:14px;
-background:#fff;
-box-shadow:inset 2px 2px 5px rgba(0,0,0,.08),4px 4px 10px rgba(0,0,0,.12);
+    width:90%;
+    max-width:340px;
+    margin:8px;
+    padding:12px;
+    padding-right:35px;
+    border:0;
+    border-radius:14px;
+    font-size:16px;
+    background:var(--input);
+    color:var(--text);
+    box-shadow:inset 2px 2px 5px #00000014,4px 4px 10px #0000001f;
 }
 
 select{
-appearance:none;
--webkit-appearance:none;
-background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath d='M1 3l5 5 5-5' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E");
-background-repeat:no-repeat;
-background-position:right 12px center;
-}
-
-.box{
-max-width:340px;
-margin:auto;
-background:var(--card);
-padding:15px;
-border-radius:18px;
-box-shadow:8px 8px 20px rgba(0,0,0,.12);
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-font-size:18px;
+    appearance:none;
+    -webkit-appearance:none;
+    text-align:left;
+    text-align-last:left;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath d='M1 3l5 5 5-5' fill='none' stroke='%23000000' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
 }
 
 button{
-padding:12px 18px;
-margin:6px;
-cursor:pointer;
-border:none;
-border-radius:28px;
-font-weight:bold;
-font-size:14px;
-background:linear-gradient(to bottom,#ffffff,#e8e8e8);
-box-shadow:4px 4px 0 #bdbdbd,6px 8px 14px rgba(0,0,0,.18);
-transition:all .15s ease;
+    margin:6px;
+    padding:12px 18px;
+    border:0;
+    border-radius:28px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:bold;
+    background:linear-gradient(to bottom,#fff,#e8e8e8);
+    box-shadow:4px 4px 0 #bdbdbd,6px 8px 14px #0003;
+    transition:all .15s ease;
 }
 
 button:hover{
-transform:translate(-1px,-1px);
-box-shadow:5px 5px 0 #bdbdbd,8px 10px 16px rgba(0,0,0,.22);
+    transform:translate(-1px,-1px);
+    box-shadow:5px 5px 0 #bdbdbd,8px 10px 16px #0004;
 }
 
 button:active{
-transform:translateY(3px);
-box-shadow:0 1px 0 #bdbdbd,0 2px 4px rgba(0,0,0,0.15);
+    transform:translateY(3px);
+}
+
+body.dark button:not(.saveBtn):not(.cancelBtn){
+    color:#fff;
+    background:linear-gradient(#444,#2c2c2c);
+    box-shadow:4px 4px 0 #111,6px 8px 14px #0007;
+}
+
+.box{
+    max-width:340px;
+    margin:auto;
+    padding:15px;
+    border-radius:18px;
+    background:var(--card);
+    box-shadow:8px 8px 20px #0002;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    font-size:18px;
+}
+
+.highlight-total{
+    display:inline-block;
+    padding:4px 10px;
+    border:3px solid #ffd700;
+    border-radius:10px;
+    background:#fff8dc;
+    color:#000;
+    animation:goldGlow 1.5s infinite alternate;
+}
+
+body.dark .highlight-total{
+    background:#302b00;
+    color:#fff;
+}
+
+@keyframes goldGlow{
+    from{box-shadow:0 0 5px #ffd700,0 0 10px #ffd700}
+    to{box-shadow:0 0 15px #ffea00,0 0 25px #ffb300,0 0 35px #ff6f00}
+}
+
+.sobField{
+    display:flex;
+    align-items:center;
+    width:90%;
+    max-width:340px;
+    margin:auto;
+    overflow:hidden;
+    border-radius:14px;
+    background:var(--input);
+    box-shadow:inset 2px 2px 5px #00000014,4px 4px 10px #0000001f;
+}
+
+.sobField input{
+    flex:1;
+    width:auto;
+    margin:0;
+    padding:12px 14px;
+    outline:0;
+    background:transparent;
+    box-shadow:none;
+}
+
+#scanBtn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:46px;
+    height:46px;
+    margin:0;
+    padding:0;
+    border-left:1px solid #ddd;
+    border-radius:0;
+    background:transparent;
+    box-shadow:none;
+}
+
+#scanBtn svg{
+    width:22px;
+    height:22px;
+    fill:#222;
+}
+
+body.dark #scanBtn svg{
+    fill:#fff;
+}
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
 }
 
 table{
-width:100%;
-margin:auto;
-border-collapse:collapse;
-font-size:12px;
-border:1px solid black;
+    width:100%;
+    min-width:700px;
+    border-collapse:collapse;
+    border:1px solid #000;
+    background:var(--table);
+    font-size:12px;
 }
 
-th,td{
-border:1px solid black;
-padding:2px 4px;
-text-align:center;
-vertical-align:middle;
-line-height:14px;
+th,
+td{
+    padding:2px 4px;
+    border:1px solid #000;
+    text-align:center;
+    vertical-align:middle;
+    line-height:14px;
+}
+
+body.dark th,
+body.dark td{
+    border-color:#555;
+    color:#fff;
+}
+
+body.dark th{
+    background:#303030;
+}
+
+body.dark td{
+    background:#252525;
 }
 
 .header{
-display:flex;
-justify-content:space-between;
-font-size:13px;
-margin-bottom:10px;
-align-items:center;
-gap:6px;
-flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+    align-items:center;
+    width:100%;
+    gap:6px;
+    margin-bottom:10px;
+    font-size:13px;
+    overflow:visible;
 }
 
 .header-left,
 .header-center,
 .header-right{
-display:flex;
-align-items:center;
-gap:4px;
-min-width:0;
-flex:1 1 auto;
+    display:flex;
+    align-items:center;
+    gap:4px;
+    min-width:0;
+}
+
+.header-left{
+    justify-content:flex-start;
 }
 
 .header-center{
-justify-content:center;
+    justify-content:center;
+    white-space:nowrap;
 }
 
 .header-right{
-justify-content:flex-end;
+    justify-content:flex-end;
+    white-space:nowrap;
 }
 
 .headerText{
-display:inline-block;
-white-space:nowrap;
+    white-space:nowrap;
+    font-weight:bold;
 }
 
 .headerLine{
-display:inline-flex;
-align-items:flex-end;
-justify-content:center;
-height:16px;
-min-width:60px;
-max-width:110px;
-padding:0 4px;
-border-bottom:1.5px solid #000;
-font-weight:bold;
-vertical-align:bottom;
-line-height:16px;
-box-sizing:border-box;
+    display:inline-flex;
+    align-items:flex-end;
+    justify-content:center;
+    width:max-content;
+    min-width:120px;
+    max-width:none;
+    height:16px;
+    padding:0 6px;
+    border-bottom:1.5px solid #000;
+    white-space:nowrap;
+    font-weight:bold;
+    line-height:16px;
 }
 
-#printArea .headerLine{
-min-width:50px;
-max-width:95px;
-}
-
-.activityRow{
-background:#f5f5f5;
-font-size:11px;
-font-weight:bold;
+.header-right span{
+    font-weight:normal;
 }
 
 .activityCell{
-background:transparent;
-font-size:10px;
-font-weight:bold;
-text-align:left !important;
-padding:6px 6px 6px 12px;
-vertical-align:top;
-white-space:normal;
+    padding:6px 6px 6px 12px;
+    background:transparent;
+    font-size:10px;
+    font-weight:bold;
+    text-align:left!important;
+    vertical-align:top;
 }
 
 .activityCell pre{
-margin:0;
-font:inherit;
-white-space:pre-wrap;
-line-height:12px;
+    margin:0;
+    font:inherit;
+    line-height:12px;
+    white-space:pre-wrap;
 }
 
 .activityTotalsCell{
-background:#eaeaea;
-font-size:10px;
-font-weight:bold;
-text-align:left!important;
-padding:6px 6px 6px 12px;
-vertical-align:top;
+    padding:6px 6px 6px 12px;
+    background:#eaeaea;
+    font-size:10px;
+    font-weight:bold;
+    text-align:left!important;
+    vertical-align:top;
+}
+
+body.dark .activityCell{
+    background:#2a2a2a;
+}
+
+body.dark .activityTotalsCell{
+    background:#333;
 }
 
 .editBtn,
 .deleteBtn{
-box-shadow:3px 3px 0 #9e9e9e,5px 6px 12px rgba(0,0,0,.25);
+    min-width:auto;
+    margin:0;
+    padding:2px 6px;
+    font-size:11px;
+    line-height:1;
+    box-shadow:3px 3px 0 #9e9e9e,5px 6px 12px #0004;
 }
 
-.editBtn:hover,
-.deleteBtn:hover{
-transform:translate(-1px,-1px);
-box-shadow:4px 4px 0 #9e9e9e,7px 8px 16px rgba(0,0,0,.30);
-}
-body.dark{
-background:#151515;
-color:#f2f2f2;
+.print-all-wrap{
+    position:relative;
+    display:inline-block;
 }
 
-body.dark .box,
-body.dark .sobField,
-body.dark .editCard,
-body.dark .loginCard{
-background:#242424;
-color:white;
-border:1px solid #3b3b3b;
+.print-split{
+    display:inline-flex;
+    align-items:center;
+    overflow:hidden;
+    border-radius:28px;
+    vertical-align:middle;
+    box-shadow:4px 4px 0 #bdbdbd,6px 8px 14px #0003;
 }
 
-body.dark input,
-body.dark select,
-body.dark textarea{
-background:#2f2f2f;
-color:white;
-border:1px solid #555;
+.print-split button{
+    margin:0;
+    border-radius:0;
+    padding:12px 18px;
+    background:linear-gradient(to bottom,#fff,#e8e8e8);
+    box-shadow:none;
 }
 
-body.dark input::placeholder{
-color:#aaa;
+.print-print-btn{
+    border-radius:28px 0 0 28px!important;
+    border-right:1px solid #bdbdbd!important;
 }
 
-body.dark table{
-background:#1b1b1b;
-color:#fff;
-border-color:#555;
+.print-all-btn{
+    min-width:75px;
+    padding-right:14px!important;
+    padding-left:12px!important;
+    border-radius:0 28px 28px 0!important;
 }
 
-body.dark th{
-background:#303030;
-color:#fff;
-border-color:#555;
+body.dark .print-split button{
+    color:#fff;
+    background:linear-gradient(#444,#2c2c2c);
 }
 
-body.dark td{
-background:#252525;
-color:#fff;
-border-color:#555;
+.print-dropdown{
+    display:none;
+    position:absolute;
+    top:100%;
+    right:0;
+    z-index:9999;
+    width:200px;
+    margin-top:6px;
+    padding:8px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--card);
+    box-shadow:0 8px 20px #0003;
+    text-align:left;
 }
 
-body.dark .activityTotalsCell{
-background:#333;
+.print-dropdown.show{
+    display:block;
 }
 
-body.dark .activityCell{
-background:#2a2a2a;
+.print-user-list{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    max-height:220px;
+    overflow:auto;
 }
 
-body.dark hr{
-border-color:#555;
-}
-body.dark button:not(.saveBtn):not(.cancelBtn){
-background:linear-gradient(#444,#2c2c2c);
-color:white;
-box-shadow:
-4px 4px 0 #111,
-6px 8px 14px rgba(0,0,0,.45);
-}
-body.dark .editActions,
-body.dark .loginActions{
-background:#242424;
+.print-user-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    line-height:1.2;
 }
 
-body.dark .editTitle{
-color:#7dbbff;
-}
-body.dark .scannerBox{
-background:#222;
-}
-body.dark ::-webkit-scrollbar{
-height:12px;
-width:12px;
+.print-user-item input{
+    width:auto;
+    margin:0;
+    padding:0;
+    box-shadow:none;
 }
 
-body.dark ::-webkit-scrollbar-track{
-background:#222;
+.editModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:10000;
+    align-items:center;
+    justify-content:center;
+    background:#0009;
+    backdrop-filter:blur(4px);
 }
 
-body.dark ::-webkit-scrollbar-thumb{
-background:#666;
-border-radius:20px;
-}
-.editBtn{
-padding:2px 6px;
-font-size:11px;
-line-height:1;
-margin:0;
-min-width:auto;
+.editModal.show{
+    display:flex;
 }
 
-.box:hover{
-transform:translateY(-2px);
-box-shadow:12px 12px 28px rgba(0,0,0,.15);
-transition:.2s;
-}
-
-.footer-left{
-position:fixed;
-bottom:5px;
-left:10px;
-font-size:12px;
-}
-
-.footer-right{
-position:fixed;
-bottom:5px;
-right:10px;
-text-align:right;
-font-size:12px;
-}
-
-#a4{
-padding:10mm;
-box-sizing:border-box;
-}
-
-.editCard,
-.loginCard{
-background:#ffffff;
-max-width:360px;
-width:95%;
-max-height:85vh;
-overflow-y:auto;
-border:1px solid rgba(255,255,255,.8);
-backdrop-filter:blur(8px);
-margin:10px auto;
-padding:14px;
-border-radius:20px;
-box-shadow:10px 14px 40px rgba(0,0,0,.25),4px 6px 15px rgba(0,0,0,.15);
-animation:popIn .2s ease;
+.editCard{
+    width:95%;
+    max-width:360px;
+    max-height:85vh;
+    overflow-y:auto;
+    padding:14px;
+    border:1px solid #ffffffcc;
+    border-radius:20px;
+    background:var(--card);
+    color:var(--text);
+    box-shadow:10px 14px 40px #0004;
 }
 
 .editTitle{
-font-size:20px;
-font-weight:bold;
-margin-bottom:15px;
-color:#1565c0;
+    margin-bottom:15px;
+    color:#1565c0;
+    font-size:20px;
+    font-weight:bold;
 }
 
-.editField,
-.loginField{
-width:100%;
-margin:8px 0;
-padding:12px;
-border-radius:12px;
-border:2px solid #e0e0e0;
-font-size:15px;
-transition:.2s;
+.editField{
+    width:100%;
+    margin:8px 0;
+    padding:12px;
+    border:2px solid #e0e0e0;
+    border-radius:12px;
+    font-size:15px;
 }
 
 .timeField{
-width:100%;
-min-width:0;
-margin:8px 0;
-box-sizing:border-box;
+    width:100%;
+    min-width:0;
 }
 
-.editField:focus,
-.loginField:focus{
-outline:none;
-border-color:#1565c0;
-box-shadow:0 0 10px rgba(21,101,192,.25);
-}
-
-.editActions,
-.loginActions{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-top:15px;
-position:sticky;
-bottom:0;
-background:white;
-padding-top:10px;
+.editActions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
 }
 
 .saveBtn{
-background:linear-gradient(135deg,#00c853,#009624);
-color:white;
-box-shadow:4px 4px 0 #00701a,6px 8px 14px rgba(0,0,0,.25);
+    min-width:120px;
+    color:#fff;
+    background:linear-gradient(135deg,#00c853,#009624);
 }
 
 .cancelBtn{
-background:linear-gradient(135deg,#ff5252,#c62828);
-color:white;
-box-shadow:4px 4px 0 #8e0000,6px 8px 14px rgba(0,0,0,.25);
+    min-width:120px;
+    color:#fff;
+    background:linear-gradient(135deg,#ff5252,#c62828);
 }
 
-.saveBtn,
-.cancelBtn{
-height:46px;
-min-width:120px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:15px;
-font-weight:bold;
+.footer-left{
+    position:fixed;
+    bottom:5px;
+    left:10px;
+    z-index:3;
+    font-size:12px;
 }
 
-.loginBtn{
-background:linear-gradient(135deg,#00c853,#009624);
-color:white;
-box-shadow:4px 4px 0 #00701a,6px 8px 14px rgba(0,0,0,.25);
-}
-
-@keyframes popIn{
-from{
-transform:scale(.9);
-opacity:0;
-}
-to{
-transform:scale(1);
-opacity:1;
-}
-}
-
-@media print {
-@page{
-size:A4 portrait;
-margin:8mm;
-}
-
-html,body{
-margin:0;
-padding:0;
-width:100%;
-height:auto;
-background:white;
-font-family:'Arimo',sans-serif;
-overflow:visible;
-}
-@media print{
-
-html,
-body,
-table,
-tr,
-td,
-th,
-.box,
-.activityCell,
-.activityTotalsCell{
-
-background:transparent !important;
-color:#000 !important;
-box-shadow:none !important;
-text-shadow:none !important;
-filter:none !important;
-
-}
-
-.highlight-total{
-
-background:transparent !important;
-border:none !important;
-box-shadow:none !important;
-color:#000 !important;
-
-}
-
-button{
-display:none!important;
-}
-
-}
-.container,
-.footer-left,
-.footer-right,
-h2,
-.top-buttons,
-.deleteBtn{
-display:none !important;
-}
-
-.editColumn{
-display:none !important;
-}
-
-tfoot button{
-display:none !important;
-}
-
-#printArea{
-display:block !important;
-width:100%;
-margin:0;
-padding:0;
-overflow:visible;
-}
-
-#a4{
-width:100%;
-padding:0;
-margin:0;
-box-sizing:border-box;
-overflow:visible;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-font-size:10px;
-table-layout:auto;
-}
-
-th,td{
-border:1px solid black;
-padding:3px;
-white-space:nowrap;
-word-break:break-word;
-vertical-align:middle;
-}
-
-tr{
-page-break-inside:avoid;
-break-inside:avoid;
-}
-
-.activityCell{
-font-size:9px;
-line-height:11px;
-word-break:break-word;
-}
-
-.header{
-margin-bottom:8px;
-font-size:11px;
-gap:4px;
-flex-wrap:nowrap;
-}
-
-.header-left,
-.header-center,
-.header-right{
-gap:3px;
-}
-
-.headerLine{
-min-width:42px;
-max-width:85px;
-}
-
-.deleteColumn{
-display:none !important;
-}
-
-.activityTotalsCell,
-tfoot td{
-border:1px solid #000 !important;
-}
-}
-
-.table-wrapper{
-width:100%;
-}
-
-@media screen and (max-width: 768px){
-.table-wrapper{
-overflow-x:auto;
--webkit-overflow-scrolling:touch;
-}
-
-table{
-min-width:700px;
-}
-
-.deleteBtn{
-font-size:10px;
-padding:2px 4px;
-}
-}
-
-.highlight-total{
-display:inline-block;
-padding:4px 10px;
-border:3px solid #ffd700;
-border-radius:10px;
-background:#fff8dc;
-color:#000;
-animation:goldGlow 1.5s infinite alternate;
-transition:.25s;
-}
-
-body.dark .highlight-total{
-background:#262626;
-color:#fff;
-border:3px solid #555;
-}
-
-@keyframes goldGlow{
-
-0%{
-box-shadow:
-0 0 5px #ffd700,
-0 0 10px #ffd700;
-}
-
-100%{
-box-shadow:
-0 0 15px #ffea00,
-0 0 25px #ffb300,
-0 0 35px #ff6f00;
-}
-
-}
-
-.userLoginBox{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:8px;
-margin:12px auto;
-}
-
-.hiText{
-font-size:12px;
-font-weight:bold;
-}
-
-#usernameInput{
-width:100px;
-font-weight:bold;
-padding:7px 10px;
-font-size:12px;
-margin:0;
-}
-
-#loadBtn{
-display:inline-block;
-background:linear-gradient(135deg,#1976d2,#0d47a1);
-box-shadow:4px 4px 0 #0b3a82,6px 8px 14px rgba(0,0,0,.18);
-color:white;
-padding:5px 10px;
-font-size:12px;
-margin-left:4px;
-border-radius:100px;
-}
-
-.loginBackdrop{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.55);
-z-index:10000;
-backdrop-filter:blur(4px);
-}
-
-.loginBackdrop.show{
-display:flex;
-align-items:center;
-justify-content:center;
+#cloudStatus{
+    margin-left:5px;
+    font-size:15px;
 }
 
 .scannerOverlay{
-display:none;
-position:fixed;
-inset:0;
-z-index:99999;
-background:rgba(0,0,0,.9);
-padding:16px;
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    flex-direction:column;
+    background:#000e;
 }
 
 .scannerOverlay.show{
-display:flex;
-align-items:center;
-justify-content:center;
+    display:flex;
+}
+
+.scannerTopBar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    background:#0006;
+}
+
+.scannerActionBtn{
+    margin:0;
+    padding:8px 14px;
+    color:#000;
+    background:#fff;
+    box-shadow:3px 3px 0 #999,5px 6px 12px #0003;
 }
 
 .scannerBox{
-width:100%;
-max-width:420px;
-background:#111;
-border-radius:16px;
-padding:12px;
-box-shadow:0 10px 30px rgba(0,0,0,.45);
+    flex:1;
+    width:100%;
+    background:#111;
 }
 
 #reader{
-width:100%;
+    width:100%;
+    height:100vh;
 }
 
 #reader video{
-border-radius:12px;
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover;
+}
+
+@keyframes popIn{
+    from{transform:scale(.9);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+@media print{
+    @page{
+        size:A4 portrait;
+        margin:8mm;
+    }
+
+    html,
+    body{
+        width:100%;
+        height:auto;
+        margin:0;
+        padding:0;
+        overflow:visible;
+        color:#000!important;
+        background:#fff!important;
+        font-family:'Arimo',sans-serif;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+    .container,
+    .top-buttons,
+    .footer-left,
+    .editModal,
+    .scannerOverlay,
+    button,
+    .editColumn,
+    .deleteColumn{
+        display:none!important;
+    }
+
+    #printArea{
+        display:block!important;
+        width:100%;
+        margin:0;
+        padding:0;
+    }
+
+    table{
+        width:100%;
+        min-width:0;
+        table-layout:auto;
+        font-size:10px;
+        background:#fff!important;
+    }
+
+    th,
+    td{
+        padding:3px;
+        border:1px solid #000!important;
+        color:#000!important;
+        background:#fff!important;
+        white-space:nowrap;
+    }
+
+    .activityCell{
+        font-size:9px;
+        line-height:11px;
+    }
+
+    .activityTotalsCell{
+        color:#000!important;
+        background:#eaeaea!important;
+    }
+
+    .header{
+        display:grid!important;
+        grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
+        width:100%!important;
+        margin-bottom:8px;
+        font-size:11px;
+        overflow:visible!important;
+    }
+
+    .header-left{
+        display:flex!important;
+    }
+
+    .header-center{
+        display:flex!important;
+        justify-content:center!important;
+        white-space:nowrap!important;
+    }
+
+    .header-right{
+        display:flex!important;
+        justify-content:flex-end!important;
+        white-space:nowrap!important;
+    }
+
+    .headerLine{
+        width:max-content!important;
+        min-width:100px!important;
+        max-width:none!important;
+        white-space:nowrap!important;
+        overflow:visible!important;
+    }
+
+    .header-right span{
+        font-weight:normal!important;
+    }
+}
+
+@media(max-width:768px){
+    table{
+        min-width:700px;
+    }
+}
+/* Dark mode corrections */
+body.dark .print-split{
+    box-shadow:4px 4px 0 #111,6px 8px 14px #0007;
+}
+
+body.dark .print-split button{
+    color:#fff;
+    background:linear-gradient(#444,#2c2c2c);
+    border-color:#666!important;
+}
+
+body.dark .print-dropdown{
+    border-color:#666;
+    background:#242424;
+    color:#fff;
+    box-shadow:0 8px 20px #0009;
+}
+
+body.dark .print-user-item{
+    color:#fff;
+}
+
+body.dark .editCard{
+    border-color:#666;
+    background:#242424;
+    color:#fff;
+    box-shadow:10px 14px 40px #0009;
+}
+
+body.dark .editField{
+    border-color:#666;
+    background:#2f2f2f;
+    color:#fff;
+}
+
+body.dark .editField option{
+    background:#2f2f2f;
+    color:#fff;
+}
+
+body.dark .table-wrapper{
+    scrollbar-color:#777 #222;
+}
+
+body.dark .table-wrapper::-webkit-scrollbar{
+    height:10px;
+}
+
+body.dark .table-wrapper::-webkit-scrollbar-track{
+    background:#222;
+}
+
+body.dark .table-wrapper::-webkit-scrollbar-thumb{
+    background:#777;
+    border-radius:10px;
+}
+
+body.dark .print-dropdown,
+body.dark .editCard{
+    scrollbar-color:#777 #222;
+}
+
+body.dark .print-dropdown::-webkit-scrollbar,
+body.dark .editCard::-webkit-scrollbar{
+    width:9px;
+}
+
+body.dark .print-dropdown::-webkit-scrollbar-track,
+body.dark .editCard::-webkit-scrollbar-track{
+    background:#222;
+}
+
+body.dark .print-dropdown::-webkit-scrollbar-thumb,
+body.dark .editCard::-webkit-scrollbar-thumb{
+    background:#777;
+    border-radius:10px;
+}
+@media print{
+    html,
+    body,
+    #printArea,
+    #a4,
+    .table-wrapper{
+        width:100%!important;
+        max-width:none!important;
+        height:auto!important;
+        overflow:visible!important;
+    }
+
+    .table-wrapper{
+        display:block!important;
+        overflow-x:visible!important;
+        overflow-y:visible!important;
+    }
+
+    #printArea table{
+        width:100%!important;
+        min-width:0!important;
+    }
 }
 
 </style>
-
 </head>
 
 <body>
+
 <div class="top-buttons">
-<a class="switch-btn reverse-btn" href="https://sobcombo.github.io/reverse/" target="_blank">Reverse Combo Finder</a>
-<a class="switch-btn report-btn" href="https://sobcombo.github.io/r/" target="_blank">Daily Report Generator</a>
+    <a class="switch-btn reverse-btn" href="https://sobcombo.github.io/reverse/" target="_blank">
+        Reverse Combo Finder
+    </a>
+
+    <a class="switch-btn report-btn" href="https://sobcombo.github.io/r/" target="_blank">
+        Daily Report Generator
+    </a>
 </div>
 
 <div class="container">
+
 <div class="userLoginBox">
-<span class="hiText" onclick="toggleTheme()">🌞 Hi,</span>
-<input id="usernameInput" type="text" placeholder="Enter Username" autocomplete="off">
-<button id="loadBtn" onclick="restoreTodayData()">Load</button>
+    <span class="hiText" onclick="toggleTheme()">🌞 Hi,</span>
+    <input id="usernameInput" type="text" placeholder="Enter Username" autocomplete="off">
+    <button id="loadBtn" onclick="restoreTodayData()">Load</button>
 </div>
 
 <h2>SOB coMboS calculator</h2>
-  
+
 <select id="combo" onchange="calc()">
-<option value="">Select Combo</option>
-<option value="170,80,70,150">390/300 TU Explorer Combo</option>
-<option value="170,80,0,227">397/307 Adventure Combo</option>
-<option value="170,80,28,200">398/308 ECO FUN Combo</option>
-<option value="170,80,255,0">425/335 Snow Adventure Combo</option>
-<option value="400,300,0,99">499/399 Aastha Combo</option>
-<option value="370,180,0,175">545/355 Shiv Ganesha Combo</option>
-<option value="550,375,0,50">600/425 Namah Combo</option>
-<option value="170,170,0,529,NA">699/NA Ultimate Play Combo</option>
-<option value="370,180,325,50">745/555 Viewing Fun Combo</option>
-<option value="550,375,249,170">969/794 Symbolic Combo</option>
-<option value="170,80,355,574">1099/1009 Delight Combo</option>
-<option value="370,180,355,574">1299/1109 Mini Blast Combo</option>
-<option value="550,375,250,599">1399/1224 All in Fun Combo</option>
-<option value="1350,775,0,150">1500/925 Divine Rush Combo</option>
-<option value="1400,1400,449,2350,NA">4199/NA Ultimate Mega Combo</option>
+    <option value="">Select Combo</option>
+    <option value="170,80,70,150">390/300 TU Explorer Combo</option>
+    <option value="170,80,0,227">397/307 Adventure Combo</option>
+    <option value="170,80,28,200">398/308 ECO FUN Combo</option>
+    <option value="170,80,255,0">425/335 Snow Adventure Combo</option>
+    <option value="400,300,0,99">499/399 Aastha Combo</option>
+    <option value="370,180,0,175">545/355 Shiv Ganesha Combo</option>
+    <option value="550,375,0,50">600/425 Namah Combo</option>
+    <option value="170,170,0,529,NA">699/NA Ultimate Play Combo</option>
+    <option value="370,180,325,50">745/555 Viewing Fun Combo</option>
+    <option value="550,375,249,170">969/794 Symbolic Combo</option>
+    <option value="170,80,355,574">1099/1009 Delight Combo</option>
+    <option value="370,180,355,574">1299/1109 Mini Blast Combo</option>
+    <option value="550,375,250,599">1399/1224 All in Fun Combo</option>
+    <option value="1350,775,0,150">1500/925 Divine Rush Combo</option>
+    <option value="1400,1400,449,2350,NA">4199/NA Ultimate Mega Combo</option>
 </select>
 
 <br>
 
-<input type="tel" inputmode="numeric" id="adults" min="0" max="100" maxlength="3" placeholder="No. of Adults" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(this.value.length>3)this.value=this.value.slice(0,3);if(this.value>100)this.value=100;calc();">
+<input id="adults" type="tel" inputmode="numeric" maxlength="3"
+       placeholder="No. of Adults" oninput="limitPax(this);calc()">
+
 <br>
 
-<input type="tel" inputmode="numeric" id="children" min="0" max="100" maxlength="3" placeholder="No. of Children" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(this.value.length>3)this.value=this.value.slice(0,3);if(this.value>100)this.value=100;calc();">
+<input id="children" type="tel" inputmode="numeric" maxlength="3"
+       placeholder="No. of Children" oninput="limitPax(this);calc()">
 
-<p id="warning" style="color:red;"></p>
+<p id="warning" style="color:red"></p>
 
 <div class="box">
-<div class="row"><span>TPU</span><span>₹ <span id="tpu">0</span></span></div>
-<div class="row"><span>OEPL</span><span>₹ <span id="oepl">0</span></span></div>
-<div class="row"><span>PAEPL</span><span>₹ <span id="paepl">0</span></span></div>
-<hr>
-<div class="row">
-<b style="font-size:14px;">TOTAL</b>
-<span id="totalBox" class="highlight-total">₹ <span id="total">0</span></span>
-</div>
+    <div class="row">
+        <span>TPU</span>
+        <span>₹ <span id="tpu">0</span></span>
+    </div>
+
+    <div class="row">
+        <span>OEPL</span>
+        <span>₹ <span id="oepl">0</span></span>
+    </div>
+
+    <div class="row">
+        <span>PAEPL</span>
+        <span>₹ <span id="paepl">0</span></span>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <b style="font-size:14px">TOTAL</b>
+        <span id="totalBox" class="highlight-total">
+            ₹ <span id="total">0</span>
+        </span>
+    </div>
 </div>
 
 <br>
 
 <div class="sobField">
-<input
-id="sobInput"
-type="tel"
-inputmode="numeric"
-maxlength="6"
-placeholder="Enter 6-digit SOB ID"
-autocomplete="off">
+    <input id="sobInput" type="tel" inputmode="numeric" maxlength="6"
+           placeholder="Enter 6-digit SOB ID" autocomplete="off">
 
-<button
-id="scanBtn"
-type="button"
-onclick="startScanner()">
-
-<svg viewBox="0 0 24 24">
-<path d="M9 4L7.5 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3.5L15 4H9zm3 4a5 5 0 1 1 0 10a5 5 0 0 1 0-10zm0 2.2a2.8 2.8 0 1 0 0 5.6a2.8 2.8 0 0 0 0-5.6z"/>
-</svg>
-
-</button>
+    <button id="scanBtn" type="button" onclick="startScanner()" aria-label="Scan QR code">
+        <svg viewBox="0 0 24 24">
+            <path d="M9 4L7.5 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3.5L15 4H9zm3 4a5 5 0 1 1 0 10a5 5 0 0 1 0-10zm0 2.2a2.8 2.8 0 1 0 0 5.6a2.8 2.8 0 0 0 0-5.6z"/>
+        </svg>
+    </button>
 </div>
 
 <br>
 
-<button onclick="saveEntry()" style="background:linear-gradient(135deg,#1976d2,#0d47a1);box-shadow:4px 4px 0 #0b3a82,6px 8px 14px rgba(0,0,0,.18);color:white;">Save SOB</button>
-<button onclick="resetForm()" style="background:linear-gradient(135deg,#ff9800,#ef6c00);box-shadow:4px 4px 0 #c43e00,6px 8px 14px rgba(0,0,0,.18);color:white;">Reset Calculator</button>
+<button onclick="saveEntry()" style="background:linear-gradient(135deg,#1976d2,#0d47a1);color:#fff">
+    Save SOB
+</button>
+
+<button onclick="resetForm()" style="background:linear-gradient(135deg,#ff9800,#ef6c00);color:#fff">
+    Reset Calculator
+</button>
 
 <br>
 
 <button onclick="printA4()">📄 Print My A4</button>
-<button onclick="printAllA4()">📚 Print ALL</button>
+
+<div class="print-all-wrap">
+    <div class="print-split">
+        <button class="print-print-btn" onclick="printSelectedUsers()">📑 Print</button>
+        <button class="print-all-btn" id="allPrintBtn" onclick="togglePrintMenu(event)">
+            ALL ▼
+        </button>
+    </div>
+
+    <div id="printMenu" class="print-dropdown">
+        <div id="printUserList" class="print-user-list"></div>
+    </div>
+</div>
+
 </div>
 
 <div id="printArea">
 <div id="a4">
+
 <div class="header">
-<div class="header-left">
-<b class="headerText">POS# :</b>
-<span class="headerLine"></span>
-</div>
-<div class="header-center">
-<span class="headerText">USERNA<b>M</b>E.<b>S</b> :</span>
-<span id="username" class="headerLine"></span>
-</div>
-<div class="header-right">
-<b class="headerText">DATE :</b>
-<span id="date"></span>
-</div>
+    <div class="header-left"></div>
+
+    <div class="header-center">
+        <span class="headerText">USERNA<b>M</b>E.<b>S</b> :</span>
+        <span id="username" class="headerLine"></span>
+    </div>
+
+    <div class="header-right">
+        <b class="headerText">DATE :</b>
+        <span id="date"></span>
+    </div>
 </div>
 
 <div class="table-wrapper">
 <table>
 <thead>
 <tr>
-<th class="editColumn" style="width:40px;">EDIT</th>
-<th class="deleteColumn" style="width:40px;">DEL</th>
-<th>SR</th>
-<th>SOB ID</th>
-<th>TPU</th>
-<th>OEPL</th>
-<th>PAEPL</th>
-<th>TOTAL</th>
-<th>ACTIVITIES' AMOUNTS</th>
-<th>TIME</th>
+    <th class="editColumn" style="width:40px">EDIT</th>
+    <th class="deleteColumn" style="width:40px">DEL</th>
+    <th>SR</th>
+    <th>SOB ID</th>
+    <th>TPU</th>
+    <th>OEPL</th>
+    <th>PAEPL</th>
+    <th>TOTAL</th>
+    <th>ACTIVITIES' AMOUNTS</th>
+    <th>TIME</th>
 </tr>
 </thead>
+
 <tbody id="dataBody"></tbody>
+
 <tfoot>
 <tr>
-<td class="editColumn"></td>
-<td class="deleteColumn"></td>
-<td colspan="2"><b style="font-size:11px;">TOTAL</b></td>
-<td id="tpuT"><b>0</b></td>
-<td id="oeplT"><b>0</b></td>
-<td id="paeplT"><b>0</b></td>
-<td id="grandT"><b>0</b></td>
-<td id="activityTotals" class="activityTotalsCell"></td>
-<td style="text-align:center;">
-<button id="resetAllBtn" onclick="resetAllData()" style="font-size:10px;padding:4px 6px;margin:2px;background:#d32f2f;color:white;">Reset All</button>
-</td>
+    <td class="editColumn"></td>
+    <td class="deleteColumn"></td>
+    <td colspan="2"><b>TOTAL</b></td>
+    <td id="tpuT"><b>0</b></td>
+    <td id="oeplT"><b>0</b></td>
+    <td id="paeplT"><b>0</b></td>
+    <td id="grandT"><b>0</b></td>
+    <td id="activityTotals" class="activityTotalsCell"></td>
+    <td>
+        <button onclick="resetAllData()" style="font-size:10px;padding:4px 6px;background:#d32f2f;color:#fff">
+            Reset All
+        </button>
+    </td>
 </tr>
 </tfoot>
 </table>
 </div>
+
 </div>
 </div>
 
-<div id="editModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:9999;">
+<div id="editModal" class="editModal">
 <div class="editCard">
-<div class="editTitle">✏️ Edit SOB Entry</div>
-<div style="text-align:left;font-size:13px;font-weight:bold;">SOB ID</div>
-<input id="editSob" class="editField" type="tel" maxlength="6" inputmode="numeric" placeholder="SOB ID" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(this.value.length>6)this.value=this.value.slice(0,6);">
-<div style="display:flex;gap:8px;">
-<div style="flex:1;">
-<div style="text-align:left;font-size:13px;font-weight:bold;">Adults</div>
-<input id="editAdults" class="editField" type="number" min="0" max="100" placeholder="Adults" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(this.value>100)this.value=100;">
-</div>
-<div style="flex:1;">
-<div style="text-align:left;font-size:13px;font-weight:bold;">Children</div>
-<input id="editChildren" class="editField" type="number" min="0" max="100" placeholder="Children" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(this.value>100)this.value=100;">
-</div>
-</div>
-<div style="text-align:left;font-size:13px;font-weight:bold;">Combo Type</div>
-<select id="editCombo" class="editField"></select>
-<div style="display:flex;gap:8px;">
-<div style="flex:1;min-width:0;">
-<div style="text-align:left;font-size:13px;font-weight:bold;">Hour</div>
-<select id="editHour" class="editField timeField"></select>
-</div>
-<div style="flex:1;min-width:0;">
-<div style="text-align:left;font-size:13px;font-weight:bold;">Minute</div>
-<select id="editMinute" class="editField timeField"></select>
-</div>
-<div style="flex:1;min-width:0;">
-<div style="text-align:left;font-size:13px;font-weight:bold;">AM/PM</div>
-<select id="editAmPm" class="editField timeField">
-<option>AM</option>
-<option>PM</option>
-</select>
-</div>
-</div>
-<div class="editActions">
-<button class="saveBtn" onclick="saveEdit()">Save</button>
-<button class="cancelBtn" onclick="closeEditModal()">Cancel</button>
-</div>
+
+    <div class="editTitle">✏️ Edit SOB Entry</div>
+
+    <div style="text-align:left;font-size:13px;font-weight:bold">SOB ID</div>
+    <input id="editSob" class="editField" type="tel" maxlength="6" inputmode="numeric">
+
+    <div style="display:flex;gap:8px">
+        <div style="flex:1">
+            <div style="text-align:left;font-size:13px;font-weight:bold">Adults</div>
+            <input id="editAdults"
+       class="editField"
+       type="number"
+       min="0"
+       max="100"
+       oninput="limitPax(this)">
+        </div>
+
+        <div style="flex:1">
+            <div style="text-align:left;font-size:13px;font-weight:bold">Children</div>
+            <input id="editChildren"
+       class="editField"
+       type="number"
+       min="0"
+       max="100"
+       oninput="limitPax(this)">
+        </div>
+    </div>
+
+    <div style="text-align:left;font-size:13px;font-weight:bold">Combo Type</div>
+    <select id="editCombo" class="editField"></select>
+
+    <div style="display:flex;gap:8px">
+        <select id="editHour" class="editField timeField"></select>
+        <select id="editMinute" class="editField timeField"></select>
+        <select id="editAmPm" class="editField timeField">
+            <option>AM</option>
+            <option>PM</option>
+        </select>
+    </div>
+
+    <div class="editActions">
+        <button class="saveBtn" onclick="saveEdit()">Save</button>
+        <button class="cancelBtn" onclick="closeEditModal()">Cancel</button>
+    </div>
+
 </div>
 </div>
 
-<div id="loginModal" class="loginBackdrop">
-<div class="loginCard">
-<div class="editTitle">👋 Welcome</div>
-<input id="loginUsername" class="loginField" type="text" placeholder="Please Enter Username" autocomplete="off">
-<div class="loginActions">
-<button class="loginBtn" onclick="confirmUsername()">Continue</button>
+<div class="footer-left">
+    26G21 | V4.7 <span id="cloudStatus" title="Cloud status">☁️✅</span>
 </div>
-</div>
-</div>
-
-<div class="footer-left">26G11 | V4.5</div>
 
 <div id="scannerOverlay" class="scannerOverlay">
-<div class="scannerBox">
-<div style="text-align:right">
-<button onclick="closeScanner()" style="background:white;color:black;padding:8px 15px;margin-bottom:10px;">✕ Close</button>
+    <div class="scannerTopBar">
+        <button onclick="uploadQrImage()" class="scannerActionBtn">Upload</button>
+        <button onclick="closeScanner()" class="scannerActionBtn">✕ Close</button>
+    </div>
+
+    <div class="scannerBox">
+        <div id="reader"></div>
+        <input id="uploadQrInput" type="file" accept="image/*"
+               style="display:none"
+               onchange="handleQrUpload(event)">
+    </div>
 </div>
-<div id="reader"></div>
-</div>
-</div>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
 
 <script>
-
-function todayString(){
-
-return new Intl.DateTimeFormat(
-'en-GB',
-{
-timeZone:'Asia/Kolkata',
-day:'2-digit',
-month:'2-digit',
-year:'numeric'
-}
-).format(new Date());
-
-}
-function timeString(){
-
-return new Intl.DateTimeFormat(
-'en-US',
-{
-timeZone:'Asia/Kolkata',
-hour:'2-digit',
-minute:'2-digit',
-hour12:true
-}
-).format(new Date());
-
-}
-const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_Vhlq9wHwMBBrY0gmzfLSObRzxR_ATE2jonce0aoO38O5xcjbzkG5I1sFhp61NvTQ/exec";
-let data = JSON.parse(localStorage.getItem("sobData")) || [];
+const APP_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbw_Vhlq9wHwMBBrY0gmzfLSObRzxR_ATE2jonce0aoO38O5xcjbzkG5I1sFhp61NvTQ/exec";
+let data = JSON.parse(localStorage.getItem("sobData") || "[]");
 let editingIndex = -1;
 let qrScanner = null;
+let scanLocked = false;
+let deviceId = localStorage.getItem("deviceId");
+
+if(!deviceId){
+    deviceId =
+        "DEV-" +
+        Date.now().toString(36) +
+        "-" +
+        Math.random().toString(36).substring(2,8).toUpperCase();
+
+    localStorage.setItem("deviceId",deviceId);
+}
 
 const combo = document.getElementById("combo");
 const adults = document.getElementById("adults");
 const children = document.getElementById("children");
 const sobInput = document.getElementById("sobInput");
 const warning = document.getElementById("warning");
+
 const tpuEl = document.getElementById("tpu");
 const oeplEl = document.getElementById("oepl");
 const paeplEl = document.getElementById("paepl");
 const totalEl = document.getElementById("total");
+
 const dataBody = document.getElementById("dataBody");
 const grandT = document.getElementById("grandT");
 const tpuT = document.getElementById("tpuT");
 const oeplT = document.getElementById("oeplT");
 const paeplT = document.getElementById("paeplT");
 const activityTotals = document.getElementById("activityTotals");
+
+const usernameInput = document.getElementById("usernameInput");
 const usernameEl = document.getElementById("username");
 const dateEl = document.getElementById("date");
+
 const editModal = document.getElementById("editModal");
 const editSob = document.getElementById("editSob");
 const editAdults = document.getElementById("editAdults");
@@ -1083,802 +1102,1698 @@ const editCombo = document.getElementById("editCombo");
 const editHour = document.getElementById("editHour");
 const editMinute = document.getElementById("editMinute");
 const editAmPm = document.getElementById("editAmPm");
-const loginModal = document.getElementById("loginModal");
-const loginUsername = document.getElementById("loginUsername");
+
 const scannerOverlay = document.getElementById("scannerOverlay");
+const uploadQrInput = document.getElementById("uploadQrInput");
+const printMenu = document.getElementById("printMenu");
+const printUserList = document.getElementById("printUserList");
+const cloudStatus = document.getElementById("cloudStatus");
 
-const todayKey = todayString();
-const savedDate = localStorage.getItem("sobDate");
-
-if(savedDate !== todayKey){
-data = [];
-localStorage.removeItem("sobData");
-localStorage.setItem("sobDate",todayKey);
+function todayString(){
+    return new Intl.DateTimeFormat("en-GB",{
+        timeZone:"Asia/Kolkata",
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+    }).format(new Date());
 }
 
-function pad2(n){
-return String(n).padStart(2,"0");
+function timeString(){
+    return new Intl.DateTimeFormat("en-US",{
+        timeZone:"Asia/Kolkata",
+        hour:"2-digit",
+        minute:"2-digit",
+        hour12:true
+    }).format(new Date());
 }
 
-function normalizeUsername(name){
-return (name || "").trim().toLowerCase();
+function pad2(value){
+    return String(value).padStart(2,"0");
+}
+function createEntryId(){
+    if(
+        window.crypto &&
+        typeof window.crypto.randomUUID === "function"
+    ){
+        return window.crypto.randomUUID();
+    }
+
+    return "ENTRY-" +
+        Date.now() +
+        "-" +
+        Math.random().toString(36).slice(2);
+}
+function limitPax(input){
+    input.value = input.value.replace(/[^0-9]/g,"").slice(0,3);
+
+    if(+input.value > 100){
+        input.value = "100";
+    }
 }
 
-function setEditTimeOptions(){
-editHour.innerHTML = "";
-for(let i = 1; i <= 12; i++){
-editHour.innerHTML += `<option value="${i}">${i}</option>`;
+function getUsername(){
+    return usernameInput.value.trim();
 }
 
-editMinute.innerHTML = "";
-for(let i = 0; i < 60; i++){
-let mm = pad2(i);
-editMinute.innerHTML += `<option value="${mm}">${mm}</option>`;
-}
-}
+function getUserDataKey(username = getUsername()){
+    const user = username.trim().toLowerCase();
 
-function calc(){
-let v = combo.value;
-if(!v){
-tpuEl.innerText = 0;
-oeplEl.innerText = 0;
-paeplEl.innerText = 0;
-totalEl.innerText = 0;
-warning.innerText = "";
-return;
+    return `sobData:${todayString()}:${user || "unknown"}`;
 }
 
-let p = v.split(",");
-let ta = +p[0], tc = +p[1], o = +p[2], pi = +p[3];
-let na = p[4] === "NA";
-let a = Math.max(0, +adults.value || 0);
-let c = Math.max(0, +children.value || 0);
+function saveLocalData(){
+    const serialized = JSON.stringify(data);
 
-warning.innerText = (na && c > 0) ? "⚠ Children not allowed" : "";
+    localStorage.setItem("sobData",serialized);
+    localStorage.setItem("sobDataBackup",serialized);
 
-let tpu = (a * ta) + (c * tc);
-let oepl = (a + c) * o;
-let paepl = (a + c) * pi;
-let total = tpu + oepl + paepl;
+    if(getUsername()){
+        localStorage.setItem(
+            getUserDataKey(),
+            serialized
+        );
+    }
+}
 
-tpuEl.innerText = tpu;
-oeplEl.innerText = oepl;
-paeplEl.innerText = paepl;
-totalEl.innerText = total;
+function loadUserLocalData(){
+    const username = getUsername();
 
-saveFormState();
-return { tpu, oepl, paepl, total };
+    if(!username){
+        data = [];
+        return;
+    }
+
+    const userKey = getUserDataKey(username);
+    const userData = localStorage.getItem(userKey);
+
+    if(userData){
+        try{
+            data = JSON.parse(userData) || [];
+            return;
+        }catch(error){
+            console.warn("Invalid user data:",error);
+        }
+    }
+
+    /*
+     * One-time migration from the old shared storage key.
+     * This preserves existing data for the currently saved user.
+     */
+    const oldData = localStorage.getItem("sobData");
+
+    if(oldData){
+        try{
+            const parsed = JSON.parse(oldData);
+
+            const matchingRows = Array.isArray(parsed)
+                ? parsed.filter(row =>
+                    String(row.displayName || "")
+                        .trim()
+                        .toLowerCase() ===
+                    username.toLowerCase()
+                )
+                : [];
+
+            data = matchingRows;
+            saveLocalData();
+            return;
+        }catch(error){
+            console.warn("Unable to migrate old local data:",error);
+        }
+    }
+
+    data = [];
+}
+
+
+function setCloudStatus(status){
+    if(status === "offline"){
+        cloudStatus.textContent = "☁️❌";
+        cloudStatus.title = "Network unavailable. Data saved offline.";
+    }else if(status === "syncing"){
+        cloudStatus.textContent = "☁️🔄";
+        cloudStatus.title = "Syncing with Google Sheets...";
+    }else{
+        cloudStatus.textContent = "☁️✅";
+        cloudStatus.title = "Data successfully synced.";
+    }
+}
+
+function postToCloud(payload){
+    setCloudStatus("syncing");
+
+    return fetch(APP_SCRIPT_URL,{
+        method:"POST",
+        headers:{"Content-Type":"text/plain"},
+        body:JSON.stringify(payload)
+    }).then(response => response.json());
 }
 
 function saveFormState(){
-localStorage.setItem("lastCombo", combo.value);
-localStorage.setItem("lastAdults", adults.value);
-localStorage.setItem("lastChildren", children.value);
+    localStorage.setItem("lastCombo",combo.value);
+    localStorage.setItem("lastAdults",adults.value);
+    localStorage.setItem("lastChildren",children.value);
 }
 
-function closeScanner(){
-if(qrScanner){
-qrScanner.stop().then(() => {
-qrScanner = null;
-scannerOverlay.classList.remove("show");
-});
-}else{
-scannerOverlay.classList.remove("show");
-}
+function normalizeSob(value){
+    const text = String(value || "")
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g,"");
+
+    let match = text.match(/SOB0*([0-9]{6})(?![0-9])/);
+
+    if(!match && /^[0-9]{6}$/.test(text)){
+        match = [text,text];
+    }
+
+    if(!match){
+        return "";
+    }
+
+    const number = Number(match[1]);
+
+    if(number < 100000 || number > 999999){
+        return "";
+    }
+
+    return String(number).padStart(6,"0");
 }
 
-function getVendorBreakup(comboName, pax){
-function line(items){
-return items.map(i => `${i.name}: ${i.price * pax}`).join(" | ");
+function calc(){
+    if(!combo.value){
+        tpuEl.textContent = "0";
+        oeplEl.textContent = "0";
+        paeplEl.textContent = "0";
+        totalEl.textContent = "0";
+        warning.textContent = "";
+        return null;
+    }
+
+    const parts = combo.value.split(",");
+    const adultsCount = Math.max(0,+adults.value || 0);
+    const childrenCount = Math.max(0,+children.value || 0);
+
+    const tpu =
+        adultsCount * (+parts[0]) +
+        childrenCount * (+parts[1]);
+
+    const oepl =
+        (adultsCount + childrenCount) * (+parts[2]);
+
+    const paepl =
+        (adultsCount + childrenCount) * (+parts[3]);
+
+    const total = tpu + oepl + paepl;
+
+    tpuEl.textContent = tpu;
+    oeplEl.textContent = oepl;
+    paeplEl.textContent = paepl;
+    totalEl.textContent = total;
+
+    warning.textContent =
+        parts[4] === "NA" && childrenCount > 0
+        ? "⚠ Children not allowed"
+        : "";
+
+    saveFormState();
+
+    return {tpu,oepl,paepl,total};
 }
 
-if(comboName.includes("Snow Adventure")) return `OEPL → ${line([{name:"Snow",price:255}])}`;
-if(comboName.includes("Adventure Combo")) return `PAEPL → ${line([{name:"Gamezone",price:227}])}`;
-if(comboName.includes("TU Explorer")) return `OEPL → ${line([{name:"Wax",price:70}])}\nPAEPL → ${line([{name:"Eyelusion",price:70},{name:"WOG",price:80}])}`;
-if(comboName.includes("ECO FUN")) return `OEPL → ${line([{name:"Wax",price:28}])}\nPAEPL → ${line([{name:"Mayalok",price:200}])}`;
-if(comboName.includes("Aastha")) return `PAEPL → ${line([{name:"Gamezone",price:99}])}`;
-if(comboName.includes("Shiv Ganesha")) return `PAEPL → ${line([{name:"Eyelusion",price:50},{name:"Gamezone",price:50},{name:"WOG",price:75}])}`;
-if(comboName.includes("Namah")) return `PAEPL → ${line([{name:"Gamezone",price:50}])}`;
-if(comboName.includes("Ultimate Play")) return `PAEPL → ${line([{name:"Gamezone",price:529}])}`;
-if(comboName.includes("Viewing Fun")) return `OEPL → ${line([{name:"Snow",price:225},{name:"Food",price:100}])}\nPAEPL → ${line([{name:"Gamezone",price:50}])}`;
-if(comboName.includes("Symbolic")) return `OEPL → ${line([{name:"Snow",price:200},{name:"Wax",price:49}])}\nPAEPL → ${line([{name:"Gamezone",price:100},{name:"WOG",price:70}])}`;
-if(comboName.includes("Delight")) return `OEPL → ${line([{name:"Snow",price:200},{name:"Food",price:45},{name:"Souvenir",price:60},{name:"Wax",price:50}])}\nPAEPL → ${line([{name:"Eyelusion",price:50},{name:"Mayalok",price:200},{name:"Gamezone",price:249},{name:"WOG",price:75}])}`;
-if(comboName.includes("Mini Blast")) return `OEPL → ${line([{name:"Snow",price:200},{name:"Food",price:45},{name:"Souvenir",price:60},{name:"Wax",price:50}])}\nPAEPL → ${line([{name:"Eyelusion",price:50},{name:"Mayalok",price:200},{name:"Gamezone",price:249},{name:"WOG",price:75}])}`;
-if(comboName.includes("All in Fun")) return `OEPL → ${line([{name:"Snow",price:200},{name:"Wax",price:50}])}\nPAEPL → ${line([{name:"Eyelusion",price:50},{name:"Mayalok",price:200},{name:"Gamezone",price:279},{name:"WOG",price:70}])}`;
-if(comboName.includes("Divine Rush")) return `PAEPL → ${line([{name:"Gamezone",price:100},{name:"WOG",price:50}])}`;
-if(comboName.includes("Ultimate Mega")) return `OEPL → ${line([{name:"Snow",price:150},{name:"Food",price:99},{name:"Souvenir",price:100},{name:"Wax",price:100}])}\nPAEPL → ${line([{name:"Eyelusion",price:50},{name:"Mayalok",price:150},{name:"Gamezone",price:2100},{name:"WOG",price:50}])}`;
-return "-";
-}
+function getVendorBreakup(comboName,pax){
+    function line(items){
+        return items
+            .map(item => `${item.name}: ${item.price * pax}`)
+            .join(" | ");
+    }
 
-function showLoginModal(){
-loginModal.classList.add("show");
-loginUsername.value = localStorage.getItem("username") || "";
-setTimeout(() => loginUsername.focus(), 100);
-}
+    if(comboName.includes("Snow Adventure")){
+        return `OEPL → ${line([{name:"Snow",price:255}])}`;
+    }
 
-function confirmUsername(){
-let savedUsername = loginUsername.value.trim();
-if(!savedUsername){
-alert("Username is required.");
-return;
-}
-localStorage.setItem("username", savedUsername);
-loginModal.classList.remove("show");
-document.getElementById("usernameInput").value = savedUsername;
-usernameEl.innerText = savedUsername;
-}
+    if(comboName.includes("Adventure Combo")){
+        return `PAEPL → ${line([{name:"Gamezone",price:227}])}`;
+    }
 
-async function restoreTodayData(){
-let username = document.getElementById("usernameInput").value.trim();
-if(!username){
-showLoginModal();
-return;
-}
+    if(comboName.includes("TU Explorer")){
+        return `OEPL → ${line([{name:"Wax",price:70}])}
+PAEPL → ${line([
+    {name:"Eyelusion",price:70},
+    {name:"WOG",price:80}
+])}`;
+    }
 
-let today = todayString();
-let url =
-APP_SCRIPT_URL +
-"?date=" + encodeURIComponent(today) +
-"&displayName=" + encodeURIComponent(username);
-const res = await fetch(url);
-const rows = await res.json();
+    if(comboName.includes("ECO FUN")){
+        return `OEPL → ${line([{name:"Wax",price:28}])}
+PAEPL → ${line([{name:"Mayalok",price:200}])}`;
+    }
 
-if(rows.status === "error"){
-    alert(rows.message);
-    return;
-}
+    if(comboName.includes("Aastha")){
+        return `PAEPL → ${line([{name:"Gamezone",price:99}])}`;
+    }
 
-if(!rows.length){
-    alert("No data found.");
-    return;
-}
+    if(comboName.includes("Shiv Ganesha")){
+        return `PAEPL → ${line([
+    {name:"Eyelusion",price:50},
+    {name:"Gamezone",price:50},
+    {name:"WOG",price:75}
+])}`;
+    }
 
-data = rows;
-if(rows[0].displayName) document.getElementById("usernameInput").value = rows[0].displayName;
-localStorage.setItem("sobData", JSON.stringify(data));
-render();
-}
+    if(comboName.includes("Namah")){
+        return `PAEPL → ${line([{name:"Gamezone",price:50}])}`;
+    }
 
-function startScanner(){
-scannerOverlay.classList.add("show");
+    if(comboName.includes("Ultimate Play")){
+        return `PAEPL → ${line([{name:"Gamezone",price:529}])}`;
+    }
 
-if(qrScanner){
-qrScanner.stop().finally(() => {
-qrScanner = null;
-initScanner();
-});
-}else{
-initScanner();
-}
-}
+    if(comboName.includes("Viewing Fun")){
+        return `OEPL → ${line([
+    {name:"Snow",price:225},
+    {name:"Food",price:100}
+])}
+PAEPL → ${line([{name:"Gamezone",price:50}])}`;
+    }
 
-function initScanner(){
-qrScanner = new Html5Qrcode("reader");
-qrScanner.start(
-{ facingMode: "environment" },
-{
-fps: 15,
-qrbox: { width: 260, height: 260 },
-aspectRatio: 1
-},
-onScanSuccess,
-onScanFailure
-).catch(err => {
-console.error(err);
-alert("Camera could not start.");
-closeScanner();
-});
-}
+    if(comboName.includes("Symbolic")){
+        return `OEPL → ${line([
+    {name:"Snow",price:200},
+    {name:"Wax",price:49}
+])}
+PAEPL → ${line([
+    {name:"Gamezone",price:100},
+    {name:"WOG",price:70}
+])}`;
+    }
 
-function onScanSuccess(decodedText){
-let m = decodedText.match(/(?:SOB0*)?([0-9]{6})/i);
-closeScanner();
+    if(
+        comboName.includes("Delight") ||
+        comboName.includes("Mini Blast")
+    ){
+        return `OEPL → ${line([
+    {name:"Snow",price:200},
+    {name:"Food",price:45},
+    {name:"Souvenir",price:60},
+    {name:"Wax",price:50}
+])}
+PAEPL → ${line([
+    {name:"Eyelusion",price:50},
+    {name:"Mayalok",price:200},
+    {name:"Gamezone",price:249},
+    {name:"WOG",price:75}
+])}`;
+    }
 
-if(m){
-sobInput.value = m[1];
-setTimeout(() => saveEntry(), 200);
-}
-}
+    if(comboName.includes("All in Fun")){
+        return `OEPL → ${line([
+    {name:"Snow",price:200},
+    {name:"Wax",price:50}
+])}
+PAEPL → ${line([
+    {name:"Eyelusion",price:50},
+    {name:"Mayalok",price:200},
+    {name:"Gamezone",price:279},
+    {name:"WOG",price:70}
+])}`;
+    }
 
-function onScanFailure(){
+    if(comboName.includes("Divine Rush")){
+        return `PAEPL → ${line([
+    {name:"Gamezone",price:100},
+    {name:"WOG",price:50}
+])}`;
+    }
+
+    if(comboName.includes("Ultimate Mega")){
+        return `OEPL → ${line([
+    {name:"Snow",price:150},
+    {name:"Food",price:99},
+    {name:"Souvenir",price:100},
+    {name:"Wax",price:100}
+])}
+PAEPL → ${line([
+    {name:"Eyelusion",price:50},
+    {name:"Mayalok",price:150},
+    {name:"Gamezone",price:2100},
+    {name:"WOG",price:50}
+])}`;
+    }
+
+    return "-";
 }
 
 function saveEntry(){
-let raw = sobInput.value.trim();
-let username = document.getElementById("usernameInput").value.trim();
-localStorage.setItem("username", username);
-let usernameKey = normalizeUsername(username);
+    const raw = sobInput.value.trim();
+    const sobNumber = normalizeSob(raw);
+    const username = usernameInput.value.trim();
 
-let match = raw.match(/SOB0*([0-9]{6})/i);
-if(match){
-raw = match[1];
-sobInput.value = raw;
-}
-
-if(!/^[0-9]{6}$/.test(raw)){
-alert("Enter valid 6-digit SOB ID");
-return;
-}
-
-let sob = "SOB000" + raw;
-if(data.some(d => d.sob === sob)){
-alert("This SOB ID already exists");
-return;
-}
-
-let r = calc();
-if(!r) return;
-
-let pax = (+adults.value || 0) + (+children.value || 0);
-let comboName = combo.options[combo.selectedIndex].text;
-let breakup = getVendorBreakup(comboName, pax);
-const entryId = crypto.randomUUID();
-
-data.push({
-entryId,
-deviceId,
-displayName: username,
-sob,
-...r,
-comboName,
-adults: (+adults.value || 0),
-children: (+children.value || 0),
-breakup,
-time: timeString()
-});
-
-localStorage.setItem("sobData", JSON.stringify(data));
-localStorage.setItem("username", username);
-localStorage.setItem("usernameKey", usernameKey);
-render();
-sobInput.value = "";
-
-fetch(APP_SCRIPT_URL,{
-method:"POST",
-body:JSON.stringify({
-date:todayString(),
-deviceId:deviceId,
-displayName:username,
-entryId:entryId,
-sob:sob,
-comboName:comboName,
-adults:+adults.value||0,
-children:+children.value||0,
-tpu:r.tpu,
-oepl:r.oepl,
-paepl:r.paepl,
-total:r.total,
-breakup:breakup,
-time:timeString()
-})
-})
-.then(r => r.json())
-.then(res => {
-
-    if(res.status === "success"){
-
-        console.log("Saved");
-
-    }else if(res.status === "duplicate"){
-
-        alert(res.message);
-
-        data.pop();
-        localStorage.setItem("sobData",JSON.stringify(data));
-        render();
-
-    }else{
-
-        alert(res.message || "Unknown Error");
-
+    if(!username){
+        alert("Enter Username first.");
+        return;
     }
 
-})
-.catch(err=>{
+    if(!sobNumber){
+        alert("Enter valid 6-digit SOB ID.");
+        return;
+    }
 
-    data.pop();
+    if(!combo.value){
+    alert("Select a combo.");
+    return;
+}
 
-    localStorage.setItem(
-        "sobData",
-        JSON.stringify(data)
-    );
+const adultsCount = Math.min(100,Math.max(0,+adults.value || 0));
+const childrenCount = Math.min(100,Math.max(0,+children.value || 0));
 
+adults.value = adultsCount || "";
+children.value = childrenCount || "";
+
+if(adultsCount < 1 && childrenCount < 1){
+    alert("Enter at least 1 adult or 1 child.");
+    return;
+}
+
+
+    const result = calc();
+
+    if(!result){
+        return;
+    }
+
+    const comboName = combo.options[combo.selectedIndex].text;
+    const sob = "SOB000" + sobNumber;
+
+    if(data.some(item => item.sob === sob)){
+        alert("This SOB ID already exists.");
+        return;
+    }
+
+    const entry = {
+        entryId:createEntryId(),
+        deviceId,
+        displayName:username,
+        sob,
+        ...result,
+        comboName,
+        adults:adultsCount,
+        children:childrenCount,
+        breakup:getVendorBreakup(
+            comboName,
+            adultsCount + childrenCount
+        ),
+        time:timeString()
+    };
+
+    data.push(entry);
+    saveLocalData();
     render();
 
-    alert("Save failed.\nCheck internet connection.");
+    sobInput.value = "";
+    localStorage.setItem("username",username);
 
-});
+    postToCloud({
+        date:todayString(),
+        ...entry
+    }).then(response => {
+        if(response.status === "success"){
+            setCloudStatus("success");
+        }else if(response.status === "duplicate"){
+            data = data.filter(
+                item => item.entryId !== entry.entryId
+            );
+
+            saveLocalData();
+            render();
+            setCloudStatus("success");
+            alert(response.message || "Duplicate SOB ID.");
+        }else{
+            setCloudStatus("offline");
+        }
+    }).catch(error => {
+        console.error(error);
+        setCloudStatus("offline");
+        alert("Network unavailable. Data was saved locally.");
+    });
 }
+
+async function restoreTodayData(){
+    const username = usernameInput.value.trim();
+
+    if(!username){
+        alert("Enter Username first.");
+        return;
+    }
+
+    localStorage.setItem("username",username);
+    usernameEl.textContent = username;
+
+    /*
+     * Show this user's local data immediately while cloud data loads.
+     */
+    loadUserLocalData();
+    render();
+
+    try{
+        setCloudStatus("syncing");
+
+        const response = await fetch(
+            APP_SCRIPT_URL +
+            "?date=" + encodeURIComponent(todayString()) +
+            "&displayName=" + encodeURIComponent(username)
+        );
+
+        const rows = await response.json();
+
+        if(rows.status === "error"){
+            alert(rows.message);
+            setCloudStatus("offline");
+            return;
+        }
+
+        if(!Array.isArray(rows) || !rows.length){
+            setCloudStatus("success");
+
+            if(!data.length){
+                alert("No data found.");
+            }
+
+            return;
+        }
+
+        data = rows;
+        saveLocalData();
+        render();
+        setCloudStatus("success");
+
+    }catch(error){
+        console.error(error);
+        setCloudStatus("offline");
+
+        if(!data.length){
+            alert(
+                "Network unavailable. " +
+                "No local data was found for this user."
+            );
+        }
+    }
+}
+
 
 function resetForm(){
-combo.selectedIndex = 0;
-adults.value = "";
-children.value = "";
-sobInput.value = "";
-localStorage.removeItem("lastCombo");
-localStorage.removeItem("lastAdults");
-localStorage.removeItem("lastChildren");
-tpuEl.innerText = 0;
-oeplEl.innerText = 0;
-paeplEl.innerText = 0;
-totalEl.innerText = 0;
-warning.innerText = "";
-}
+    combo.selectedIndex = 0;
+    adults.value = "";
+    children.value = "";
+    sobInput.value = "";
 
-async function resetAllData(){
+    localStorage.removeItem("lastCombo");
+    localStorage.removeItem("lastAdults");
+    localStorage.removeItem("lastChildren");
 
-if(!confirm("Reset all today's SOB IDs?")) return;
-
-let today=todayString();
-
-for(const row of data){
-
-await fetch(APP_SCRIPT_URL,{
-    method:"POST",
-    
-    body:JSON.stringify({
-
-action:"RESET",
-
-date:today,
-
-entryId:row.entryId,
-
-deviceId:deviceId
-
-})
-})
-.then(r=>r.json())
-.then(res=>{
-
-if(res.status=="success"){
-
-console.log("Saved");
-
-}
-else if(res.status=="duplicate"){
-
-alert(res.message);
-
-}
-else{
-
-alert(res.message||"Error");
-
-}
-
-})
-.catch(e=>{
-
-alert(e);
-
-});
-
-}
-
-data=[];
-
-localStorage.removeItem("sobData");
-
-render();
-
+    tpuEl.textContent = "0";
+    oeplEl.textContent = "0";
+    paeplEl.textContent = "0";
+    totalEl.textContent = "0";
+    warning.textContent = "";
 }
 
 async function deleteEntry(index){
-if(!confirm("Delete this SOB ID?")) return;
-const row = data[index];
+    if(!confirm("Delete this SOB ID?")){
+        return;
+    }
 
-const res = await fetch(APP_SCRIPT_URL,{
-    method:"POST",
-    
-    body:JSON.stringify({
+    const row = data[index];
 
-        action:"DELETE",
+    try{
+        const response = await postToCloud({
+            action:"DELETE",
+            date:todayString(),
+            entryId:row.entryId,
+            deviceId
+        });
 
-        date:todayString(),
+        if(response.status !== "deleted"){
+            alert(response.message || "Delete failed.");
+            return;
+        }
 
-        entryId:row.entryId,
-
-        deviceId:deviceId
-
-    })
-});
-
-const json=await res.json();
-
-if(json.status!="deleted"){
-
-alert("Delete failed.");
-
-return;
-
+        data.splice(index,1);
+        saveLocalData();
+        render();
+        setCloudStatus("success");
+    }catch(error){
+        setCloudStatus("offline");
+        alert("Network unavailable. Delete was not completed.");
+    }
 }
 
-data.splice(index,1);
+async function resetAllData(){
+    const username = usernameInput.value.trim();
 
-render();
+    if(!username){
+        alert("Enter Username first.");
+        return;
+    }
+
+    if(!confirm("Reset all today's SOB IDs for " + username + "?")){
+        return;
+    }
+
+    try{
+        const response = await postToCloud({
+            action:"RESET",
+            date:todayString(),
+            displayName:username,
+            deviceId
+        });
+
+        if(response.status !== "success"){
+            throw new Error(
+                response.message || "Reset failed."
+            );
+        }
+
+        data = [];
+        saveLocalData();
+        render();
+        setCloudStatus("success");
+
+    }catch(error){
+        console.error("Reset failed:",error);
+
+        // Clear local data even if the network request fails.
+        data = [];
+        saveLocalData();
+        render();
+        setCloudStatus("offline");
+
+        alert(
+            "Local data was reset, but Google Sheets could not be updated. " +
+            "Please check the Apps Script deployment and internet connection."
+        );
+    }
+}
+
+function setEditTimeOptions(){
+    editHour.innerHTML = "";
+    editMinute.innerHTML = "";
+
+    for(let hour = 1; hour <= 12; hour++){
+        editHour.innerHTML +=
+            `<option value="${hour}">${hour}</option>`;
+    }
+
+    for(let minute = 0; minute < 60; minute++){
+        const value = pad2(minute);
+
+        editMinute.innerHTML +=
+            `<option value="${value}">${value}</option>`;
+    }
 }
 
 function openEditModal(index){
-editingIndex = index;
-let d = data[index];
-editSob.value = d.sob.replace("SOB000","");
-editAdults.value = d.adults;
-editChildren.value = d.children;
-editCombo.innerHTML = "";
+    editingIndex = index;
 
-Array.from(combo.options).slice(1).forEach(opt => {
-let o = document.createElement("option");
-o.value = opt.value;
-o.textContent = opt.text;
-if(opt.text === d.comboName) o.selected = true;
-editCombo.appendChild(o);
-});
+    const row = data[index];
 
-setEditTimeOptions();
+    editSob.value = row.sob.replace("SOB000","");
+    editAdults.value = row.adults;
+    editChildren.value = row.children;
 
-let tm = (d.time || "").match(/(\d{1,2}):(\d{2})\s?(AM|PM)/i);
-if(tm){
-editHour.value = String(parseInt(tm[1]));
-editMinute.value = tm[2];
-editAmPm.value = tm[3].toUpperCase();
-}else{
-let now = new Date();
-let h = now.getHours();
-let ampm = h >= 12 ? "PM" : "AM";
-h = h % 12 || 12;
-editHour.value = String(h);
-editMinute.value = pad2(now.getMinutes());
-editAmPm.value = ampm;
-}
+    editCombo.innerHTML = "";
 
-editModal.style.display = "block";
+    Array.from(combo.options)
+        .slice(1)
+        .forEach(option => {
+            const editOption =
+                document.createElement("option");
+
+            editOption.value = option.value;
+            editOption.textContent = option.text;
+            editOption.selected =
+                option.text === row.comboName;
+
+            editCombo.appendChild(editOption);
+        });
+
+    setEditTimeOptions();
+
+    const timeMatch = String(row.time || "")
+        .match(/(\d{1,2}):(\d{2})\s?(AM|PM)/i);
+
+    if(timeMatch){
+        editHour.value = String(parseInt(timeMatch[1]));
+        editMinute.value = timeMatch[2];
+        editAmPm.value = timeMatch[3].toUpperCase();
+    }
+
+    editModal.classList.add("show");
 }
 
 function closeEditModal(){
-editModal.style.display = "none";
-editingIndex = -1;
+    editModal.classList.remove("show");
+    editingIndex = -1;
 }
 
-function saveEdit(){
-if(editingIndex < 0) return;
+async function saveEdit(){
+    if(editingIndex < 0){
+        return;
+    }
+        limitPax(editAdults);
+        limitPax(editChildren);
 
-let raw = editSob.value.trim();
-if(!/^[0-9]{6}$/.test(raw)){
-alert("Enter valid 6-digit SOB ID");
-return;
+        const adultsCount = Math.min(100,Math.max(0,+editAdults.value || 0));
+        const childrenCount = Math.min(100,Math.max(0,+editChildren.value || 0));
+
+        editAdults.value = adultsCount || "";
+        editChildren.value = childrenCount || "";
+
+        if(adultsCount < 1 && childrenCount < 1){
+            alert("Enter at least 1 adult or 1 child.");
+            return;
+        }
+
+    const raw = editSob.value.trim();
+
+    const sobNumber = normalizeSob(raw);
+
+if(!sobNumber){
+    alert("Enter valid 6-digit SOB ID!");
+    return;
 }
 
-let sob = "SOB000" + raw;
-if(data.some((d,i) => i !== editingIndex && d.sob === sob)){
-alert("This SOB ID already exists");
-return;
-}
+const sob = "SOB000" + sobNumber;
 
-let comboValue = editCombo.value;
-let comboText = editCombo.options[editCombo.selectedIndex]?.text || "";
-let tempCombo = combo.value;
-let tempAdults = adults.value;
-let tempChildren = children.value;
+    if(data.some((row,index) =>
+        index !== editingIndex && row.sob === sob
+    )){
+        alert("This SOB ID already exists.");
+        return;
+    }
 
-combo.value = comboValue;
-adults.value = editAdults.value;
-children.value = editChildren.value;
-let r = calc();
+    const comboValue = editCombo.value;
+    const comboName = editCombo.options[
+        editCombo.selectedIndex
+    ].text;
 
-combo.value = tempCombo;
-adults.value = tempAdults;
-children.value = tempChildren;
-calc();
+    const values = comboValue.split(",");
 
-if(!r) return;
+    const result = {
+        tpu:
+            adultsCount * (+values[0]) +
+            childrenCount * (+values[1]),
 
-let pax = (+editAdults.value || 0) + (+editChildren.value || 0);
-let breakup = getVendorBreakup(comboText, pax);
-const originalSob = data[editingIndex].sob;
+        oepl:
+            (adultsCount + childrenCount) * (+values[2]),
 
-data[editingIndex] = {
-...data[editingIndex],
-sob,
-comboName: comboText,
-adults:(+editAdults.value || 0),
-children:(+editChildren.value || 0),
-tpu:r.tpu,
-oepl:r.oepl,
-paepl:r.paepl,
-total:r.total,
-breakup,
-time:`${editHour.value}:${editMinute.value} ${editAmPm.value}`
-};
+        paepl:
+            (adultsCount + childrenCount) * (+values[3])
+    };
 
-localStorage.setItem("sobData", JSON.stringify(data));
+    result.total =
+        result.tpu +
+        result.oepl +
+        result.paepl;
 
-fetch(APP_SCRIPT_URL,{
-method:"POST",
-body:JSON.stringify({
-action:"UPDATE",
-date:todayString(),
-entryId:data[editingIndex].entryId,
-deviceId:deviceId,
-displayName:document.getElementById("usernameInput").value.trim(),
-sob:sob,
-comboName:comboText,
-adults:+editAdults.value||0,
-children:+editChildren.value||0,
-tpu:r.tpu,
-oepl:r.oepl,
-paepl:r.paepl,
-total:r.total,
-breakup:breakup,
-time:`${editHour.value}:${editMinute.value} ${editAmPm.value}`
-})
-})
-.then(r => r.json())
-.then(res=>{
-console.log(res);
-})
-.then(txt => console.log("Update response:", txt))
-.catch(err => console.log("Network Error while updating:", err));
+    const updatedRow = {
+        ...data[editingIndex],
+        sob,
+        comboName,
+        adults:adultsCount,
+        children:childrenCount,
+        ...result,
+        breakup:getVendorBreakup(
+            comboName,
+            adultsCount + childrenCount
+        ),
+        time:
+            `${editHour.value}:${editMinute.value} ` +
+            editAmPm.value
+    };
 
-render();
-closeEditModal();
+    data[editingIndex] = updatedRow;
+    saveLocalData();
+    render();
+    closeEditModal();
+
+    try{
+        const response = await postToCloud({
+            action:"UPDATE",
+            date:todayString(),
+            ...updatedRow,
+            deviceId
+        });
+
+        setCloudStatus(
+            response.status === "success"
+                ? "success"
+                : "offline"
+        );
+    }catch(error){
+        setCloudStatus("offline");
+    }
 }
 
 function editEntry(index){
-openEditModal(index);
+    openEditModal(index);
 }
 
-function formatTime(t){
+function formatTime(value){
+    if(!value){
+        return "";
+    }
 
-if(!t) return "";
+    const match = String(value)
+        .match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
 
-const d = new Date(t);
+    if(match){
+        return `${match[1].padStart(2,"0")}:` +
+            `${match[2]} ${match[3].toUpperCase()}`;
+    }
 
-if(!isNaN(d)){
-return d.toLocaleTimeString('en-US',{
-hour:'2-digit',
-minute:'2-digit',
-hour12:true
-});
+    const date = new Date(value);
+
+    if(!isNaN(date)){
+        return new Intl.DateTimeFormat("en-US",{
+            timeZone:"Asia/Kolkata",
+            hour:"2-digit",
+            minute:"2-digit",
+            hour12:true
+        }).format(date);
+    }
+
+    return String(value);
 }
 
-const m = String(t).match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+function parseActivities(rows){
+    const oeplActivities = {};
+    const paeplActivities = {};
 
-if(m){
-return `${m[1]}:${m[2]} ${m[3].toUpperCase()}`;
+    rows.forEach(row => {
+        String(row.breakup || "")
+            .split("\n")
+            .forEach(line => {
+                const target = line.startsWith("OEPL")
+                    ? oeplActivities
+                    : line.startsWith("PAEPL")
+                        ? paeplActivities
+                        : null;
+
+                if(!target){
+                    return;
+                }
+
+                line.replace(/^(OEPL|PAEPL)\s*→/,"")
+                    .split("|")
+                    .forEach(activity => {
+                        const parts = activity.split(":");
+
+                        if(parts.length < 2){
+                            return;
+                        }
+
+                        const name = parts[0].trim();
+                        const amount = parseInt(parts[1]) || 0;
+
+                        target[name] =
+                            (target[name] || 0) + amount;
+                    });
+            });
+    });
+
+    return {oeplActivities,paeplActivities};
 }
 
-return String(t);
-
+function formatActivities(activities){
+    return Object.entries(activities)
+        .map(([name,value]) => `${name}: ${value}`)
+        .join(" | ");
 }
+
 function render(){
-dataBody.innerHTML = "";
-let totalAll = 0;
-let tpuSum = 0;
-let oeplSum = 0;
-let paeplSum = 0;
-let oeplActivities = {};
-let paeplActivities = {};
+    dataBody.innerHTML = "";
 
-data.forEach((d,i)=>{
-dataBody.innerHTML += `
-<tr>
-<td class="editColumn"><button class="editBtn" onclick="editEntry(${i})">✏️</button></td>
-<td class="deleteColumn"><button class="deleteBtn" onclick="deleteEntry(${i})">🗑️</button></td>
-<td>${i+1}</td>
-<td><b>${d.sob}</b><br><span style="font-size:9px;white-space:nowrap;word-break:break-word;">(${((d.comboName||"")).match(/\d+\/(?:\d+|NA)/)?.[0] || ""}) (${d.adults} A + ${d.children} C)</span></td>
-<td>${d.tpu}</td>
-<td>${d.oepl}</td>
-<td>${d.paepl}</td>
-<td>${d.total}</td>
-<td class="activityCell"><pre>${d.breakup}</pre></td>
-<td style="font-size:10px;">${formatTime(d.time)}</td>
-</tr>
-`;
+    let tpuSum = 0;
+    let oeplSum = 0;
+    let paeplSum = 0;
+    let totalSum = 0;
 
-tpuSum += d.tpu;
-oeplSum += d.oepl;
-paeplSum += d.paepl;
-totalAll += d.total;
+    data.forEach((row,index) => {
+        dataBody.innerHTML += `
+        <tr>
+            <td class="editColumn">
+                <button class="editBtn"
+                    onclick="editEntry(${index})">✏️</button>
+            </td>
 
-let tempDiv = document.createElement("div");
-tempDiv.innerHTML = d.breakup;
-let text = tempDiv.innerText.split("\n");
+            <td class="deleteColumn">
+                <button class="deleteBtn"
+                    onclick="deleteEntry(${index})">🗑️</button>
+            </td>
 
-text.forEach(line => {
-line = line.trim();
+            <td>${index + 1}</td>
 
-if(line.startsWith("OEPL")){
-let activities = line.replace("OEPL →","").split("|");
-activities.forEach(a => {
-let parts = a.split(":");
-if(parts.length < 2) return;
-let name = parts[0].trim();
-let value = parseInt(parts[1]) || 0;
-oeplActivities[name] = (oeplActivities[name] || 0) + value;
-});
-}
+            <td>
+                <b>${row.sob}</b><br>
+                <span style="font-size:9px;white-space:nowrap">
+                    (${(row.comboName || "")
+                        .match(/\d+\/(?:\d+|NA)/)?.[0] || ""})
+                    (${row.adults} A + ${row.children} C)
+                </span>
+            </td>
 
-if(line.startsWith("PAEPL")){
-let activities = line.replace("PAEPL →","").split("|");
-activities.forEach(a => {
-let parts = a.split(":");
-if(parts.length < 2) return;
-let name = parts[0].trim();
-let value = parseInt(parts[1]) || 0;
-paeplActivities[name] = (paeplActivities[name] || 0) + value;
-});
-}
-});
-});
+            <td>${row.tpu}</td>
+            <td>${row.oepl}</td>
+            <td>${row.paepl}</td>
+            <td>${row.total}</td>
 
-function formatActivities(obj){
-return Object.entries(obj).map(([k,v]) => `${k}: ${v}`).join(" | ");
-}
+            <td class="activityCell">
+                <pre>${row.breakup || "-"}</pre>
+            </td>
 
-grandT.innerHTML = "<b>" + totalAll + "</b>";
-tpuT.innerHTML = "<b>" + tpuSum + "</b>";
-oeplT.innerHTML = "<b>" + oeplSum + "</b>";
-paeplT.innerHTML = "<b>" + paeplSum + "</b>";
-activityTotals.innerHTML = "<u>OEPL</u> → " + formatActivities(oeplActivities) + "<br>" + "<u>PAEPL</u> → " + formatActivities(paeplActivities);
+            <td style="font-size:10px">
+                ${formatTime(row.time)}
+            </td>
+        </tr>`;
+
+        tpuSum += +row.tpu || 0;
+        oeplSum += +row.oepl || 0;
+        paeplSum += +row.paepl || 0;
+        totalSum += +row.total || 0;
+    });
+
+    const activities = parseActivities(data);
+
+    tpuT.innerHTML = `<b>${tpuSum}</b>`;
+    oeplT.innerHTML = `<b><u>${oeplSum}</u></b>`;
+    paeplT.innerHTML = `<b><u>${paeplSum}</u></b>`;
+    grandT.innerHTML = `<b>${totalSum}</b>`;
+
+    activityTotals.innerHTML =
+        `<u>OEPL</u> → ` +
+        `${formatActivities(activities.oeplActivities)}<br>` +
+        `<u>PAEPL</u> → ` +
+        `${formatActivities(activities.paeplActivities)}`;
 }
 
 function printA4(){
-let username = document.getElementById("usernameInput").value.trim();
-if(username){
-usernameEl.innerText = username;
-localStorage.setItem("username", username);
-}
-window.print();
-}
+    const username = usernameInput.value.trim();
 
-async function printAllA4(){
-try{
-const username=document.getElementById("usernameInput").value.trim();
-const originalData=structuredClone(data);
-const originalUser = usernameEl.innerText;
-const today = todayString();
+    if(username){
+        usernameEl.textContent = username;
+        localStorage.setItem("username",username);
+    }
 
-const res = await fetch(
-APP_SCRIPT_URL +
-"?date=" + encodeURIComponent(today) +
-"&all=true"
-);
-const rows=await res.json();
-
-if(rows.status=="error"){
-
-alert(rows.message);
-
-return;
-
+    window.print();
 }
 
-if(!rows.length){
-alert("No entries found.");
-return;
+function getSelectedPrintUsers(){
+    const allCheckbox =
+        document.getElementById("printAllUsers");
+
+    const checkboxes = [
+        ...printUserList.querySelectorAll(".print-user-check")
+    ];
+
+    // Menu was never opened: print all users.
+    if(!allCheckbox && checkboxes.length === 0){
+        return null;
+    }
+
+    // ALL is selected: do not filter users.
+    if(allCheckbox && allCheckbox.checked){
+        return null;
+    }
+
+    return checkboxes
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value);
 }
 
-let grouped = {};
-rows.forEach(r => {
-const key = (r.displayName || "Unknown").trim().toLowerCase();
-if(!grouped[key]) grouped[key] = { name:(r.displayName || "Unknown").trim(), rows:[] };
-grouped[key].rows.push(r);
-});
 
-let html = "";
-for(const group of Object.values(grouped)){
-data = group.rows;
-usernameEl.innerText = group.name;
-render();
-let page=document.getElementById("printArea").cloneNode(true);
+async function fetchUsersFromAppsScript(){
+    const localUsers = data
+        .map(row => String(row.displayName || "").trim())
+        .filter(Boolean);
 
-page.querySelectorAll(".editColumn,.deleteColumn").forEach(e=>e.remove());
+    try{
+        const response = await fetch(
+            APP_SCRIPT_URL +
+            "?date=" + encodeURIComponent(todayString()) +
+            "&all=true"
+        );
 
-page.querySelectorAll(".editBtn,.deleteBtn,#resetAllBtn").forEach(e=>e.remove());
+        const cloudRows = await response.json();
 
-html+=`
-<div class="a4Page">
-${page.innerHTML}
-<hr style="border:1px dashed #999;margin:12px 0;">
-</div>`;
+        const cloudUsers = Array.isArray(cloudRows)
+            ? cloudRows
+                .map(row =>
+                    String(row.displayName || "").trim()
+                )
+                .filter(Boolean)
+            : [];
+
+        return [...new Set([
+            ...localUsers,
+            ...cloudUsers
+        ])].sort((a,b) => a.localeCompare(b));
+
+    }catch(error){
+        console.error("Unable to fetch print users:",error);
+
+        return [...new Set(localUsers)]
+            .sort((a,b) => a.localeCompare(b));
+    }
 }
 
-data = originalData;
-usernameEl.innerText = originalUser;
-render();
 
-const win = window.open("", "_blank");
-if(!win){
-alert("Popup blocked.\nPlease allow popups for this website.");
-return;
+function updatePrintButtonLabel(){
+    const selected = getSelectedPrintUsers();
+    const button = document.getElementById("allPrintBtn");
+
+    button.textContent =
+        selected && selected.length
+            ? `${selected.length} ▼`
+            : "ALL ▼";
 }
 
-win.document.open();
-win.document.write(`
+function buildPrintMenu(users){
+    if(!users.length){
+        printUserList.innerHTML =
+            `<div style="font-size:12px">No users found.</div>`;
+        return;
+    }
+
+    printUserList.innerHTML = `
+        <label class="print-user-item">
+            <input type="checkbox" id="printAllUsers" checked>
+            <span><b>All</b></span>
+        </label>
+
+        <div style="border-top:1px solid var(--border);margin:6px 0"></div>
+
+        ${users.map(user => `
+            <label class="print-user-item">
+                <input type="checkbox"
+                       class="print-user-check"
+                       value="${user}"
+                       checked>
+                <span>${user}</span>
+            </label>
+        `).join("")}
+    `;
+
+    const allCheckbox =
+        document.getElementById("printAllUsers");
+
+    const checkboxes = [
+        ...printUserList.querySelectorAll(".print-user-check")
+    ];
+
+    allCheckbox.addEventListener("change",() => {
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = allCheckbox.checked;
+        });
+
+        updatePrintButtonLabel();
+    });
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener("change",() => {
+            allCheckbox.checked =
+                checkboxes.every(item => item.checked);
+
+            updatePrintButtonLabel();
+        });
+    });
+
+    updatePrintButtonLabel();
+}
+
+async function togglePrintMenu(event){
+    event.stopPropagation();
+
+    if(printMenu.classList.contains("show")){
+        printMenu.classList.remove("show");
+        return;
+    }
+
+    const users = await fetchUsersFromAppsScript();
+
+    buildPrintMenu(users);
+    printMenu.classList.add("show");
+}
+
+async function printSelectedUsers(){
+    const selectedUsers = getSelectedPrintUsers();
+
+    printMenu.classList.remove("show");
+
+    if(
+        Array.isArray(selectedUsers) &&
+        selectedUsers.length === 0
+    ){
+        alert("Please select at least one user.");
+        return;
+    }
+
+    // null means ALL users.
+    await printAllA4(selectedUsers);
+}
+
+
+function buildPrintablePage(rows,userName){
+    let tpuSum = 0;
+    let oeplSum = 0;
+    let paeplSum = 0;
+    let totalSum = 0;
+    let htmlRows = "";
+
+    rows.forEach((row,index) => {
+        htmlRows += `
+        <tr>
+            <td>${index + 1}</td>
+            <td>
+                <b>${row.sob || ""}</b><br>
+                <span style="font-size:9px;white-space:nowrap">
+                    (${(row.comboName || "")
+                        .match(/\d+\/(?:\d+|NA)/)?.[0] || ""})
+                    (${row.adults || 0} A + ${row.children || 0} C)
+                </span>
+            </td>
+            <td>${row.tpu || 0}</td>
+            <td>${row.oepl || 0}</td>
+            <td>${row.paepl || 0}</td>
+            <td>${row.total || 0}</td>
+            <td class="activityCell">
+                <pre>${row.breakup || "-"}</pre>
+            </td>
+            <td>${formatTime(row.time)}</td>
+        </tr>`;
+
+        tpuSum += +row.tpu || 0;
+        oeplSum += +row.oepl || 0;
+        paeplSum += +row.paepl || 0;
+        totalSum += +row.total || 0;
+    });
+
+    const activities = parseActivities(rows);
+
+    return `
+    <div class="a4Page">
+        <div class="header">
+            <div class="header-left"></div>
+
+            <div class="header-center">
+                <span>USERNA<b>M</b>E.<b>S</b> :</span>
+                <span class="headerLine">
+                    <b>${userName || ""}</b>
+                </span>
+            </div>
+
+            <div class="header-right">
+                <b>DATE :</b>
+                <span>${todayString()}</span>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>SR</th>
+                    <th>SOB ID</th>
+                    <th>TPU</th>
+                    <th>OEPL</th>
+                    <th>PAEPL</th>
+                    <th>TOTAL</th>
+                    <th>ACTIVITIES' AMOUNTS</th>
+                    <th>TIME</th>
+                </tr>
+            </thead>
+
+            <tbody>${htmlRows}</tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="2"><b>TOTAL</b></td>
+                    <td><b>${tpuSum}</b></td>
+                    <td><b><u>${oeplSum}</u></b></td>
+                    <td><b><u>${paeplSum}</u></b></td>
+                    <td><b>${totalSum}</b></td>
+                    <td class="activityTotalsCell">
+                        <u>OEPL</u> →
+                        ${formatActivities(activities.oeplActivities)}
+                        <br>
+                        <u>PAEPL</u> →
+                        ${formatActivities(activities.paeplActivities)}
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+<hr class="user-tear-line">
+
+        <hr style="border:1px dashed #999;margin:12px 0">
+    </div>`;
+}
+
+function mergePrintRows(cloudRows){
+    const rows = Array.isArray(cloudRows)
+        ? [...cloudRows]
+        : [];
+
+    const existingKeys = new Set(
+        rows.map(row =>
+            String(
+                row.entryId ||
+                `${row.displayName}|${row.sob}`
+            ).trim()
+        )
+    );
+
+    /*
+     * Add locally saved rows that have not reached Google Sheets yet.
+     * This prevents unsynced local entries from disappearing from Print All.
+     */
+    data.forEach(localRow => {
+        const key = String(
+            localRow.entryId ||
+            `${localRow.displayName}|${localRow.sob}`
+        ).trim();
+
+        if(!existingKeys.has(key)){
+            rows.push(localRow);
+            existingKeys.add(key);
+        }
+    });
+
+    return rows;
+}
+
+
+async function printAllA4(selectedUsers = null){
+    try{
+        const response = await fetch(
+            APP_SCRIPT_URL +
+            "?date=" + encodeURIComponent(todayString()) +
+            "&all=true"
+        );
+
+        const cloudRows = await response.json();
+
+if(cloudRows.status === "error"){
+    alert(cloudRows.message);
+    return;
+}
+
+const rows = mergePrintRows(cloudRows);
+
+        if(!Array.isArray(rows) || !rows.length){
+            alert("No entries found.");
+            return;
+        }
+
+        let filteredRows = rows;
+
+        if(Array.isArray(selectedUsers)){
+            const allowed = new Set(
+                selectedUsers.map(user =>
+                    user.trim().toLowerCase()
+                )
+            );
+
+            filteredRows = rows.filter(row =>
+                allowed.has(
+                    String(row.displayName || "Unknown")
+                        .trim()
+                        .toLowerCase()
+                )
+            );
+        }
+
+        if(!filteredRows.length){
+            alert("No selected users to print.");
+            return;
+        }
+
+        const grouped = {};
+
+        filteredRows.forEach(row => {
+            const name =
+                String(row.displayName || "Unknown").trim();
+
+            if(!grouped[name]){
+                grouped[name] = [];
+            }
+
+            grouped[name].push(row);
+        });
+
+        const html = Object.entries(grouped)
+            .map(([name,userRows]) =>
+                buildPrintablePage(userRows,name)
+            )
+            .join("");
+
+        const win = window.open("", "_blank");
+
+        if(!win){
+            alert("Popup blocked. Please allow popups.");
+            return;
+        }
+
+        const sharedCss = [...document.querySelectorAll("style")]
+            .map(style => style.textContent)
+            .join("\n");
+
+        win.document.open();
+
+        win.document.write(`
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Print All</title>
 <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
-${document.querySelector("style").innerHTML}
-body{margin:0;padding:0;font-family:'Arimo',sans-serif;}
-.a4Page{margin:0 0 12px 0;padding:0;page-break-inside:avoid;break-inside:avoid;}
-.editColumn,
-.deleteColumn,
-.editBtn,
-.deleteBtn,
-#resetAllBtn,
-tfoot button{
-display:none!important;
+${sharedCss}
+
+html,
+body{
+    margin:0!important;
+    padding:0!important;
+    width:100%!important;
+    background:#fff!important;
+    color:#000!important;
+    font-family:'Arimo',sans-serif!important;
+    overflow:visible!important;
+}
+.user-tear-line{
+    display:block!important;
+    margin:10px 0!important;
+    border:0!important;
+    border-top:1px dashed #777!important;
+    height:0!important;
+}
+
+.printSheet,
+.a4Page,
+.a4,
+.table-wrapper{
+    width:100%!important;
+    max-width:none!important;
+    height:auto!important;
+    margin:0!important;
+    overflow:visible!important;
+}
+
+.table-wrapper{
+    display:block!important;
+    overflow-x:visible!important;
+    overflow-y:visible!important;
+}
+
+.a4Page{
+    width:100%!important;
+    margin:0!important;
+    padding:0 0 10px!important;
+    page-break-after:auto!important;
+    break-after:auto!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid-page!important;
+}
+tr{
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+}
+
+.a4{
+    padding:0!important;
+}
+
+.header{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
+    align-items:center!important;
+    width:100%!important;
+    margin-bottom:8px!important;
+    font-size:11px!important;
+    white-space:nowrap!important;
+}
+
+.header-left{
+    display:flex!important;
+}
+
+.header-center{
+    display:flex!important;
+    justify-content:center!important;
+    white-space:nowrap!important;
+}
+
+.header-right{
+    display:flex!important;
+    justify-content:flex-end!important;
+    white-space:nowrap!important;
+}
+
+.headerLine{
+    width:max-content!important;
+    min-width:100px!important;
+    max-width:none!important;
+    white-space:nowrap!important;
+}
+
+table{
+    width:100%!important;
+    min-width:0!important;
+    border-collapse:collapse!important;
+    font-size:10px!important;
+}
+
+th,
+td{
+    padding:3px!important;
+    border:1px solid #000!important;
+    color:#000!important;
+    background:#fff!important;
+}
+
+.activityCell{
+    font-size:9px!important;
+    padding:6px 6px 6px 12px!important;
+    white-space:normal!important;
+}
+
+.activityTotalsCell{
+    color:#000!important;
+    padding:6px 6px 6px 12px!important;
+    background:#eaeaea!important;
+}
+
+hr{
+    display:none!important;
 }
 </style>
 </head>
-<body>${html}</body>
+
+<body>
+${html}
+</body>
 </html>
-`);
-win.document.close();
+        `);
 
-win.onload = function(){
-setTimeout(function(){
-win.focus();
-win.print();
-},300);
-};
-}catch(err){
-console.error(err);
-alert("Unable to print all.");
-}
+        win.document.close();
+
+        setTimeout(() => {
+            win.focus();
+            win.print();
+        },500);
+
+    }catch(error){
+        console.error("Print All failed:",error);
+        alert("Unable to print all users.");
+    }
 }
 
+
+
+function fullActivityName(name){
+    const names = {
+        Snow:"Snow Park (Shrinathji Ent)",
+        Food:"Food Court (Shrinathji Foods)",
+        Wax:"Wax Museum (Victory Fun Park)",
+        Souvenir:"Souvenir (Mayan Assts)",
+        Gamezone:"Gamezone (Saachi)",
+        Eyelusion:"Eyelusion (Rinz)",
+        Mayalok:"Mayalok (Divine)",
+        WOG:"World of Ganesha (Mahadev)"
+    };
+
+    return names[name] || name;
+}
+
+function getReceiptActivityLines(breakup){
+    const activityMap = {
+        OEPL:"",
+        PAEPL:""
+    };
+
+    String(breakup || "")
+        .split("\n")
+        .forEach(line => {
+            line = line.trim();
+
+            if(line.startsWith("OEPL")){
+                activityMap.OEPL =
+                    line.replace(/^OEPL\s*→/,"").trim();
+            }
+
+            if(line.startsWith("PAEPL")){
+                activityMap.PAEPL =
+                    line.replace(/^PAEPL\s*→/,"").trim();
+            }
+        });
+
+    let html = "";
+
+    if(activityMap.OEPL){
+        html += `<div>OEPL: ${activityMap.OEPL}</div>`;
+    }
+
+    if(activityMap.PAEPL){
+        html += `<div>PAEPL: ${activityMap.PAEPL}</div>`;
+    }
+
+    return html;
+}
+  
 function toggleTheme(){
+    const dark = document.body.classList.toggle("dark");
 
-const dark=document.body.classList.toggle("dark");
+    localStorage.setItem("theme",dark ? "dark" : "light");
 
-localStorage.setItem("theme",dark?"dark":"light");
-
-document.querySelector(".hiText").textContent=
-dark?"🌙 Hi,":"🌞 Hi,";
-
+    document.querySelector(".hiText").textContent =
+        dark ? "🌙 Hi," : "🌞 Hi,";
 }
 
-if(localStorage.getItem("theme")==="dark"){
-    document.body.classList.add("dark");
-    document.querySelector(".hiText").textContent="🌙 Hi,";
+function startScanner(){
+    scanLocked = false;
+    scannerOverlay.classList.add("show");
+
+    if(qrScanner){
+        qrScanner.stop()
+            .catch(() => {})
+            .finally(() => {
+                qrScanner = null;
+                initScanner();
+            });
+    }else{
+        initScanner();
+    }
 }
-function setDate(){
-dateEl.innerText = todayString();
+
+
+function initScanner(){
+    if(typeof Html5Qrcode === "undefined"){
+        alert("QR scanner library is still loading.");
+        closeScanner();
+        return;
+    }
+
+    qrScanner = new Html5Qrcode("reader");
+
+    qrScanner.start(
+        {facingMode:"environment"},
+        {
+            fps:15,
+            qrbox:(width,height) => ({
+                width:Math.min(width,height) * .8,
+                height:Math.min(width,height) * .8
+            })
+        },
+        onScanSuccess,
+        () => {}
+    ).catch(error => {
+        console.error(error);
+        alert("Camera could not start.");
+        closeScanner();
+    });
 }
+
+function closeScanner(){
+    if(qrScanner){
+        qrScanner.stop()
+            .catch(() => {})
+            .finally(() => {
+                qrScanner = null;
+                scannerOverlay.classList.remove("show");
+            });
+    }else{
+        scannerOverlay.classList.remove("show");
+    }
+}
+
+function uploadQrImage(){
+    uploadQrInput.click();
+}
+
+function saveScannedValue(value){
+    if(scanLocked){
+        return false;
+    }
+
+    const sob = normalizeSob(value);
+
+    if(!sob){
+        return false;
+    }
+
+    scanLocked = true;
+    sobInput.value = sob;
+    closeScanner();
+
+    setTimeout(() => {
+        saveEntry();
+
+        setTimeout(() => {
+            scanLocked = false;
+        },500);
+    },200);
+
+    return true;
+}
+
+
+function onScanSuccess(decodedText){
+    saveScannedValue(decodedText);
+}
+
+
+function loadTesseract(){
+    return new Promise((resolve,reject) => {
+        if(window.Tesseract){
+            resolve();
+            return;
+        }
+
+        const script = document.createElement("script");
+
+        script.src =
+            "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
+
+        script.onload = resolve;
+        script.onerror = reject;
+
+        document.head.appendChild(script);
+    });
+}
+
+async function handleQrUpload(event){
+    const input = event.target;
+    const file = input.files && input.files[0];
+
+    if(!file){
+        return;
+    }
+
+    try{
+        let qrText = "";
+
+        try{
+            qrText = await Html5Qrcode.scanFile(file,false);
+        }catch(error){
+            qrText = "";
+        }
+
+        if(!saveScannedValue(qrText)){
+            await loadTesseract();
+
+            const result = await Tesseract.recognize(
+                file,
+                "eng"
+            );
+
+            if(!saveScannedValue(result.data.text)){
+                alert("No valid SOB ID found in the image.");
+            }
+        }
+    }catch(error){
+        console.error("Image scan failed:",error);
+        alert("Unable to read the uploaded image.");
+    }finally{
+        input.value = "";
+    }
+}
+
+document.addEventListener("click",event => {
+    if(!event.target.closest(".print-all-wrap")){
+        printMenu.classList.remove("show");
+    }
+});
+
+window.addEventListener("offline",() =>
+    setCloudStatus("offline")
+);
+
+window.addEventListener("online",() =>
+    setCloudStatus("success")
+);
 
 function restoreFormState(){
-combo.value = localStorage.getItem("lastCombo") || "";
-adults.value = localStorage.getItem("lastAdults") || "";
-children.value = localStorage.getItem("lastChildren") || "";
-if(combo.value) calc();
+    combo.value =
+        localStorage.getItem("lastCombo") || "";
+
+    adults.value =
+        localStorage.getItem("lastAdults") || "";
+
+    children.value =
+        localStorage.getItem("lastChildren") || "";
+
+    if(combo.value){
+        calc();
+    }
 }
 
 setEditTimeOptions();
 restoreFormState();
 
-let deviceId = localStorage.getItem("deviceId");
-if(!deviceId){
-deviceId = "DEV-" + Date.now().toString(36) + "-" + Math.random().toString(36).substring(2,8).toUpperCase();
-localStorage.setItem("deviceId",deviceId);
-}
+const savedUsername =
+    localStorage.getItem("username") || "";
 
-let savedUsername = localStorage.getItem("username");
-if(!savedUsername){
-showLoginModal();
-}else{
-document.getElementById("usernameInput").value = savedUsername;
-usernameEl.innerText = savedUsername;
-}
+usernameInput.value = savedUsername;
+usernameEl.textContent = savedUsername;
+dateEl.textContent = todayString();
 
-setDate();
+usernameInput.addEventListener("change",() => {
+    const username = usernameInput.value.trim();
+
+    if(!username){
+        data = [];
+        render();
+        return;
+    }
+
+    localStorage.setItem("username",username);
+    usernameEl.textContent = username;
+
+    loadUserLocalData();
+    render();
+});
+
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark");
+    document.querySelector(".hiText").textContent = "🌙 Hi,";
+}
+loadUserLocalData();
 render();
+setCloudStatus(
+    navigator.onLine ? "success" : "offline"
+);
 </script>
-<script src="https://unpkg.com/html5-qrcode"></script>
+
 </body>
 </html>
+
+
